@@ -5,3 +5,13 @@ input:valid {
 input:invalid {
   border: 1px solid red;
 }
+
+input:invalid:required {
+  background-color: pink;
+}
+input:invalid:minLength {
+  background-color: blue;
+}
+input:invalid:maxLength {
+  background-color: yellow;
+}

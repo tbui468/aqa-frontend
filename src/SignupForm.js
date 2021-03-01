@@ -1,23 +1,48 @@
 import React from 'react';
 import './Form.css';
 
+//props: method, route, title
 class SignupForm extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+    constructor (props) {
+        super(props);
+    }
 
-  render() {
-    return( 
-      <div>
-        <h2>{this.props.title}</h2>
-        <form action='/signup' method='POST'>
-          <input type='text' name='email' placeholder='email' required/><br/>
-          <input type='text' name='password' placeholder='password' required/><br/>
-          <button type='submit'>Submit</button>
-        </form>
-      </div>
-    );
-  }
+    render () {
+        const { title, method, route } = this.props;
+        return (
+            <div>
+                <h2>{title}</h2>
+                <form action={route} method={method}>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="name"
+                        required
+                        maxLength="30"
+                    />
+                    <br />
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="email"
+                        required
+                        maxLength="30"
+                    />
+                    <br />
+                    <input
+                        type="text"
+                        name="password"
+                        placeholder="password"
+                        required
+                        minLength="5"
+                        maxLength="30"
+                    />
+                    <br />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        );
+    }
 }
 
 export default SignupForm;
