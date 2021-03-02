@@ -13,10 +13,10 @@ const Router = () => {
                     <Main />
                 </Route>
                 <Route exact path="/signup">
-                    <Signup />
+                    <Signup title="Signup here" method="POST" route={"http://localhost:3000/signup"} />
                 </Route>
                 <Route exact path="/login">
-                    <Login />
+                    <Login title="Login here" method="POST" route={"http://localhost:3000/login"} />
                 </Route>
             </Switch>
         </BrowserRouter>
