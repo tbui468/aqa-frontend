@@ -6,7 +6,8 @@ import LoginForm from './LoginForm';
 class App extends React.Component {
     constructor () {
         super(); //must call super otherwise shit breaks
-        this.SERVER_DOMAIN = 'https://intense-tundra-41777.herokuapp.com';
+        //        this.SERVER_DOMAIN = 'https://intense-tundra-41777.herokuapp.com';
+        this.SERVER_DOMAIN = 'http://localhost:3000';
         this.state = {
             message: ''
         };

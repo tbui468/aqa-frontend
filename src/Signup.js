@@ -1,6 +1,8 @@
 import React from 'react';
+import './Form.css';
 
-class LoginForm extends React.Component {
+//props: method, route, title
+class Signup extends React.Component {
     constructor (props) {
         super(props);
     }
@@ -9,12 +11,20 @@ class LoginForm extends React.Component {
         const { title, method, route } = this.props;
         return (
             <div>
-                <h3>{title}</h3>
+                <h2>{title}</h2>
                 <form action={route} method={method}>
                     <input
                         type="text"
                         name="name"
                         placeholder="name"
+                        required
+                        maxLength="30"
+                    />
+                    <br />
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="email"
                         required
                         maxLength="30"
                     />
@@ -28,11 +38,11 @@ class LoginForm extends React.Component {
                         maxLength="30"
                     />
                     <br />
-                    <button type="submit">Login</button>
+                    <button type="submit">Submit</button>
                 </form>
             </div>
         );
     }
 }
 
-export default LoginForm;
+export default Signup;
