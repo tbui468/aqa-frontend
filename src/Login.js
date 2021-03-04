@@ -1,17 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Login = ({ title, method, route }) => {
+const Login = () => {
+    const history = useHistory();
+
+    const [values, setValues] = useState({
+      username: '',
+      password: ''
+    });
+
+    const handleUsernameChange = (e) => {
+      e.persist();
+      setValues((values) => ({
+        ...values,
+        username: e.target.values,
+      }));
+    }
+
+    const handlePasswordChange = (e) => {
+      e.persist();
+      setValues((values) => ({
+        ...values,
+        password: e.target.values,
+      }));
+    }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      username: e.target.username.value,
+      password: e.target.password.value
+    }
+
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/json; charset=UTF-8"}
+    }).then((results) => {
+      history.push('/profile');
+    });
+  }
+
+
     return (
         <div>
-            <h3>{title}</h3>
-            <form action={route} method={method}>
+            <h3>Login</h3>
+            <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    name="name"
+                    name="username"
                     placeholder="name"
                     required
                     maxLength="30"
+                    value={values.username}
+                    onChange={handleUsernameChange}
                 />
                 <br />
                 <input
@@ -21,6 +67,8 @@ const Login = ({ title, method, route }) => {
                     required
                     minLength="5"
                     maxLength="30"
+                    value={values.password}
+                    onChange={handlePasswordChange}
                 />
                 <br />
                 <button type="submit">Login</button>
@@ -29,10 +77,5 @@ const Login = ({ title, method, route }) => {
     );
 };
 
-Login.propTypes = {
-    title: PropTypes.string.isRequired,
-    method: PropTypes.string.isRequired,
-    route: PropTypes.string.isRequired
-};
 
 export default Login;
