@@ -13,11 +13,11 @@ const Profile = () => {
             mode: "cors",
             credentials: "include"
         }).then((result) => {
-                return result.json();
-            }).then((json) => {
-                setName(json.user_name);
-                setEmail(json.user_email);
-            });
+            return result.json();
+        }).then((json) => {
+            setName(json.user_name);
+            setEmail(json.user_email);
+        });
     }, []);
 
     const logout = () => {
