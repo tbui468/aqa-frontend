@@ -9,14 +9,16 @@ module.exports = {
   },
   devServer: {
     contentBase: './build',
-    historyApiFallback: true,
+    historyApiFallback: true, //need this for react router to work
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
+        use: [ //loaders are called from bottom to top
+          'babel-loader',
+          'eslint-loader']
       },
       {
         test: /\.css$/,
