@@ -14,7 +14,7 @@ const Login = () => {
         e.persist();
         setValues((values) => ({
             ...values,
-            username: e.target.values
+            username: e.target.value
         }));
     };
 
@@ -22,7 +22,7 @@ const Login = () => {
         e.persist();
         setValues((values) => ({
             ...values,
-            password: e.target.values
+            password: e.target.value
         }));
     };
 

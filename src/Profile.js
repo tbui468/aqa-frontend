@@ -18,7 +18,7 @@ const Profile = () => {
         }).then((result) => {
             return result.json();
         }).then((json) => {
-            if(json.user_name) {
+            if (json.user_name) {
                 setName(json.user_name);
                 setEmail(json.user_email);
                 setLoggedIn(true);
@@ -39,16 +39,15 @@ const Profile = () => {
 
     return (
         <div>
-        {loggedIn ?
-            (<div>
-                <h1>Profile page</h1>
-                <p>Name: {name}</p>
-                <p>Email: {email}</p>
-                <button onClick={logout}>Log out</button>
-            </div>)
-            :
-            (<AccessDenied />)
-        }
+            {loggedIn ?
+                (<div>
+                    <h1>Profile page</h1>
+                    <p>Name: {name}</p>
+                    <p>Email: {email}</p>
+                    <button onClick={logout}>Log out</button>
+                </div>) :
+                (<AccessDenied />)
+            }
         </div>
     );
 };

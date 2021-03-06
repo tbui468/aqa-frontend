@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const QuestionDetail = ({ match }) => {
-
     const [values, setValues] = useState({
         question: '',
         author: '',
@@ -16,12 +15,12 @@ const QuestionDetail = ({ match }) => {
             }).then((json) => {
                 //process array of answers here
                 let arr = [];
-                for(let i = 0; i < json.answer.length; i++) {
+                for (let i = 0; i < json.answer.length; i++) {
                     let obj = {
                         answer: json.answer[i].answer_text,
                         author: json.answer[i].user_name,
                         date: json.answer[i].answer_date
-                    }
+                    };
                     arr.push(obj);
                 }
                 setValues((values) => ({
@@ -41,13 +40,13 @@ const QuestionDetail = ({ match }) => {
             <p>{values.author}</p>
             <p>{values.date}</p>
             <ul>
-            {values.answers.map((item, index) => {
-                return (<li key={index}>
-                            <p>Answer: {item.answer}</p>
-                            <p>by: {item.author}</p>
-                            <p>date posted: {item.date}</p>
-                         </li>);
-            })}
+                {values.answers.map((item, index) => {
+                    return (<li key={index}>
+                        <p>Answer: {item.answer}</p>
+                        <p>by: {item.author}</p>
+                        <p>date posted: {item.date}</p>
+                    </li>);
+                })}
             </ul>
         </div>
     );

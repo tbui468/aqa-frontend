@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Main from './Main';
 import QuestionIndex from './QuestionIndex';
@@ -11,8 +11,6 @@ import Profile from './Profile';
 //change a single state of the Router, which will trigger an update of all the children too....
 
 const Router = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
     return (
         <BrowserRouter>
             <NavBar />
@@ -23,10 +21,10 @@ const Router = () => {
                 <Route exact path="/signup">
                     <Signup title="Signup here" method="POST" route={"http://localhost:3000/signup"} />
                 </Route>
-                <Route exact callback={setIsLoggedIn} path="/login">
+                <Route exact path="/login">
                     <Login />
                 </Route>
-                <Route exact callback={setIsLoggedIn} path="/profile">
+                <Route exact path="/profile">
                     <Profile />
                 </Route>
             </Switch>
