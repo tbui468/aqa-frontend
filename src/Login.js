@@ -42,7 +42,7 @@ const Login = () => {
             headers: { "Content-Type": "application/json; charset=UTF-8" }
         }).then((results) => {
             history.push('/profile');
-            window.location.reload();
+            window.location.reload(); //need this to update Navbar link (Login -> Profile)
         });
     };
 

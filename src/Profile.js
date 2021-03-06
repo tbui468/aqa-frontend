@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import AccessDenied from './AccessDenied';
 
 
 const Profile = () => {
     const [name, setName] = useState('name goes here');
     const [email, setEmail] = useState('email goes here');
-    const history = useHistory();
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    const history = useHistory(); //use this to redirect to different route
 
     useEffect(() => {
         fetch("http://localhost:3000/profile", {
@@ -15,29 +18,37 @@ const Profile = () => {
         }).then((result) => {
             return result.json();
         }).then((json) => {
-            setName(json.user_name);
-            setEmail(json.user_email);
+            if(json.user_name) {
+                setName(json.user_name);
+                setEmail(json.user_email);
+                setLoggedIn(true);
+            }
         });
     }, []);
 
     const logout = () => {
-    //send get request to api/logout, and then redirect to main page
         fetch("http://localhost:3000/logout", {
             method: "GET",
             mode: "cors",
             credentials: "include"
         }).then((results) => {
             history.push('/');
-            window.location.reload();
+            window.location.reload(); //need this to change NavBar link (profile -> login)
         });
     };
 
     return (
         <div>
-            <h1>Profile page</h1>
-            <p>Name: {name}</p>
-            <p>Email: {email}</p>
-            <button onClick={logout}>Log out</button>
+        {loggedIn ?
+            (<div>
+                <h1>Profile page</h1>
+                <p>Name: {name}</p>
+                <p>Email: {email}</p>
+                <button onClick={logout}>Log out</button>
+            </div>)
+            :
+            (<AccessDenied />)
+        }
         </div>
     );
 };
