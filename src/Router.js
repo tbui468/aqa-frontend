@@ -17,6 +17,7 @@ const Router = () => {
             <Switch>
                 <Route exact path="/" component={Main} />
                 <Route exact path="/questions" component={QuestionIndex} />
+                <Route exact path="/questions/new" component={QuestionForm} />
                 <Route exact path="/questions/:id" component={QuestionDetail} />
                 <Route exact path="/signup">
                     <Signup title="Signup here" method="POST" route={"http://localhost:3000/signup"} />
