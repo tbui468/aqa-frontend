@@ -5,8 +5,6 @@ const Main = () => {
     return (
         <div>
             <Link to="/signup">Signup</Link>
-            <br/>
-            <Link to="/login">Login</Link>
         </div>
     ); 
 };

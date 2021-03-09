@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Main from './Main';
-import Login from './Login';
 import Signup from './Signup';
 import QuestionIndex from './QuestionIndex';
 import QuestionDetail from './QuestionDetail';
@@ -17,6 +16,7 @@ import NavBar from './NavBar';
 const Router = () => {
     return (
         <BrowserRouter>
+            <NavBar />
             <Switch>
                 <Route exact path="/" component={Main} />
                 <Route exact path="/signup">
@@ -26,18 +26,13 @@ const Router = () => {
                         route={'http://localhost:3000/signup'}
                     />
                 </Route>
-                <Route exact path="/login">
-                    <Login />
-                </Route>
                 <Route exact path="/questions">
-                    <NavBar />
                     <QuestionIndex />
                 </Route>
                 <Route exact path="/questions/new" component={QuestionForm} />
                 <Route exact path="/questions/:id" component={QuestionDetail} />
                 <Route exact path="/questions/:question_id/answers/new" component={AnswerForm} />
                 <Route exact path="/profile">
-                    <NavBar />
                     <Profile />
                 </Route>
             </Switch>

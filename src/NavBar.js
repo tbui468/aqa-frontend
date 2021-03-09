@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useHistory } from 'react-router-dom';
 //one option: each time Navbar is created, check logged in status
 
 const NavBar = () => {
+
+
+    const history = useHistory();
+
+    const [values, setValues] = useState({
+        username: '',
+        password: ''
+    });
     const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
@@ -23,7 +30,44 @@ const NavBar = () => {
                     setLoggedIn(false);
                 }
             });
-    }, []);
+    }, [loggedIn]); //dom should re-render everytime loggedIn state changes
+
+
+    const handleUsernameChange = (e) => {
+        e.persist();
+        setValues((values) => ({
+            ...values,
+            username: e.target.value
+        }));
+    };
+
+    const handlePasswordChange = (e) => {
+        e.persist();
+        setValues((values) => ({
+            ...values,
+            password: e.target.value
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const data = {
+            username: e.target.username.value,
+            password: e.target.password.value
+        };
+
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        }).then((results) => {
+            history.push('/profile');
+            window.location.reload(); //need this to update Navbar link (Login -> Profile)
+        });
+    };
 
     return (
         <ul>
@@ -35,17 +79,34 @@ const NavBar = () => {
                     <Link to="/profile">Profile</Link>
                 </li>
             ) : (
-                <div>
-                    <li>
-                        <Link to="/signup">Signup</Link>
-                    </li>
-                    <li>
-                        <Link to="/login">Login</Link>
-                    </li>
-                </div>
+                <li>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="name"
+                            required
+                            maxLength="30"
+                            value={values.username}
+                            onChange={handleUsernameChange}
+                        />
+                        <input
+                            type="text"
+                            name="password"
+                            placeholder="password"
+                            required
+                            minLength="5"
+                            maxLength="30"
+                            value={values.password}
+                            onChange={handlePasswordChange}
+                        />
+                        <button type='submit'>Login</button>
+                    </form>
+                </li>
             )}
         </ul>
     );
 };
 
 export default NavBar;
+
