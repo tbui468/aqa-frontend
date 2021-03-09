@@ -3,8 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 //one option: each time Navbar is created, check logged in status
 
 const NavBar = () => {
-
-
     const history = useHistory();
 
     const [values, setValues] = useState({
@@ -64,8 +62,18 @@ const NavBar = () => {
             body: JSON.stringify(data),
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).then((results) => {
-            history.push('/profile');
-            window.location.reload(); //need this to update Navbar link (Login -> Profile)
+            setLoggedIn(true);
+        });
+    };
+
+
+    const logout = () => {
+        fetch('http://localhost:3000/logout', {
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'include'
+        }).then((results) => {
+            setLoggedIn(false);
         });
     };
 
@@ -75,9 +83,14 @@ const NavBar = () => {
                 <Link to="/questions">Questions</Link>
             </li>
             {loggedIn ? (
-                <li>
-                    <Link to="/profile">Profile</Link>
-                </li>
+                <div>
+                    <li>
+                        <Link to="/profile">Profile</Link>
+                    </li>
+                    <li>
+                        <button onClick={logout}>Log out</button>
+                    </li>
+                </div>
             ) : (
                 <li>
                     <form onSubmit={handleSubmit}>

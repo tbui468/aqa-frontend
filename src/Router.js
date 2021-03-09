@@ -10,8 +10,7 @@ import AnswerForm from './AnswerForm'; //also serves as answer edit
 import Profile from './Profile';
 import NavBar from './NavBar';
 
-//when going to '/', if logged in redirect to /questions
-//change a single state of the Router, which will trigger an update of all the children too....
+//state should be saved here if avoiding re-rendering/mounting of components is necessary
 
 const Router = () => {
     return (

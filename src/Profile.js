@@ -28,16 +28,6 @@ const Profile = () => {
 
     }, []);
 
-    const logout = () => {
-        fetch('http://localhost:3000/logout', {
-            method: 'GET',
-            mode: 'cors',
-            credentials: 'include'
-        }).then((results) => {
-            history.push('/');
-            window.location.reload(); //need this to change NavBar link (profile -> login)
-        });
-    };
 
     return (
         <div>
@@ -46,7 +36,6 @@ const Profile = () => {
                     <h1>Profile page</h1>
                     <p>Name: {name}</p>
                     <p>Email: {email}</p>
-                    <button onClick={logout}>Log out</button>
                 </div>
             ) : (
                 <AccessDenied />
