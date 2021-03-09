@@ -10,6 +10,7 @@ const Login = () => {
         password: ''
     });
 
+
     const handleUsernameChange = (e) => {
         e.persist();
         setValues((values) => ({
@@ -34,18 +35,17 @@ const Login = () => {
             password: e.target.password.value
         };
 
-        fetch("http://localhost:3000/login", {
-            method: "POST",
-            mode: "cors",
-            credentials: "include",
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include',
             body: JSON.stringify(data),
-            headers: { "Content-Type": "application/json; charset=UTF-8" }
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).then((results) => {
             history.push('/profile');
             window.location.reload(); //need this to update Navbar link (Login -> Profile)
         });
     };
-
 
     return (
         <div>
@@ -77,6 +77,5 @@ const Login = () => {
         </div>
     );
 };
-
 
 export default Login;

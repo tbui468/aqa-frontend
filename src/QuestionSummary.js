@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const QuestionSummary = ({ id, question, author, date }) => {
     return (
         <div>
-            <Link to={"/questions/" + id}>{question}</Link>
+            <Link to={'/questions/' + id}>{question}</Link>
             <p>{author}</p>
             <p>{date}%</p>
         </div>

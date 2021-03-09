@@ -7,10 +7,7 @@ import React from 'react';
 //      need: text and user id
 
 const QuestionForm = () => {
-    return (
-        <h1>I'm a quesiton form</h1>
-    );
+    return <h1>I'm a quesiton form</h1>;
 };
-
 
 export default QuestionForm;

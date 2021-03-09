@@ -43,12 +43,12 @@ const Signup = () => {
             password: e.target.password.value
         };
 
-        fetch("http://localhost:3000/users", {
-            method: "POST",
-            mode: "cors",
-            credentials: "include",
+        fetch('http://localhost:3000/users', {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include',
             body: JSON.stringify(data),
-            headers: { "Content-Type": "application/json; charset=UTF-8" }
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).then((results) => {
             history.push('/login');
         });
@@ -93,6 +93,5 @@ const Signup = () => {
         </div>
     );
 };
-
 
 export default Signup;
