@@ -29,7 +29,7 @@ const Router = () => {
                     <QuestionIndex />
                 </Route>
                 <Route exact path="/questions/new" component={QuestionForm} />
-                <Route exact path="/questions/:id" component={QuestionDetail} />
+                <Route exact path="/questions/:question_id" component={QuestionDetail} />
                 <Route exact path="/questions/:question_id/answers/new" component={AnswerForm} />
                 <Route exact path="/profile">
                     <Profile />

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
 const QuestionDetail = ({ match }) => {
+    const history = useHistory();
     const [values, setValues] = useState({
         question: '',
         author: '',
@@ -9,7 +11,7 @@ const QuestionDetail = ({ match }) => {
     });
 
     useEffect(() => {
-        fetch('http://localhost:3000/questions/' + match.params.id)
+        fetch('http://localhost:3000/questions/' + match.params.question_id)
             .then((results) => {
                 return results.json();
             })
@@ -34,12 +36,18 @@ const QuestionDetail = ({ match }) => {
             });
     }, []);
 
+
+    const handleClick = (e) => {
+        history.push('/questions/' + match.params.question_id + '/answers/new');
+    };
+
     return (
         <div>
             <h1>Question Detail Page for item: {match.params.id}</h1>
             <h2>{values.question}</h2>
             <p>{values.author}</p>
             <p>{values.date}</p>
+            <button onClick={handleClick}>Post New Answer</button>
             <ul>
                 {values.answers.map((item, index) => {
                     return (
