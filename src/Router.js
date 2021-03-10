@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Main from './Main';
-import Signup from './Signup';
 import QuestionIndex from './QuestionIndex';
 import QuestionDetail from './QuestionDetail';
 import QuestionForm from './QuestionForm'; //also serves as question edit
@@ -18,13 +17,6 @@ const Router = () => {
             <NavBar />
             <Switch>
                 <Route exact path="/" component={Main} />
-                <Route exact path="/signup">
-                    <Signup
-                        title="Signup here"
-                        method="POST"
-                        route={'http://localhost:3000/signup'}
-                    />
-                </Route>
                 <Route exact path="/questions">
                     <QuestionIndex />
                 </Route>
