@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import './navBar.css';
 //one option: each time Navbar is created, check logged in status
 
 const NavBar = () => {
@@ -74,49 +75,54 @@ const NavBar = () => {
             credentials: 'include'
         }).then((results) => {
             setLoggedIn(false);
+            history.push('/');
         });
     };
 
     return (
-        <ul>
-            <li>
-                <Link to="/questions">Questions</Link>
-            </li>
-            {loggedIn ? (
-                <div>
-                    <li>
-                        <Link to="/profile">Profile</Link>
-                    </li>
-                    <li>
-                        <button onClick={logout}>Log out</button>
-                    </li>
-                </div>
-            ) : (
-                <li>
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            name="username"
-                            placeholder="name"
-                            required
-                            maxLength="30"
-                            value={values.username}
-                            onChange={handleUsernameChange}
-                        />
-                        <input
-                            type="text"
-                            name="password"
-                            placeholder="password"
-                            required
-                            minLength="5"
-                            maxLength="30"
-                            value={values.password}
-                            onChange={handlePasswordChange}
-                        />
-                        <button type='submit'>Login</button>
-                    </form>
+        <ul id="nav-container">
+            <div id="nav-left">
+                <li className="nav-item">
+                    <Link to="/questions">Questions</Link>
                 </li>
-            )}
+            </div>
+            <div id="nav-right">
+                {loggedIn ? (
+                    <div>
+                        <li className="nav-item">
+                            <Link to="/profile">Profile</Link>
+                        </li>
+                        <li className="nav-item">
+                            <button onClick={logout}>Log out</button>
+                        </li>
+                    </div>
+                ) : (
+                    <li className="nav-item">
+                        <form onSubmit={handleSubmit}>
+                            <input
+                                type="text"
+                                name="username"
+                                placeholder="name"
+                                required
+                                maxLength="30"
+                                value={values.username}
+                                onChange={handleUsernameChange}
+                            />
+                            <input
+                                type="text"
+                                name="password"
+                                placeholder="password"
+                                required
+                                minLength="5"
+                                maxLength="30"
+                                value={values.password}
+                                onChange={handlePasswordChange}
+                            />
+                            <button type='submit'>Login</button>
+                        </form>
+                    </li>
+                )}
+            </div>
         </ul>
     );
 };

@@ -1,0 +1,23 @@
+/* NavBar specific css */
+
+#nav-container {
+    background-color: grey;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+#nav-left {
+    background-color: red;
+    border: 1px solid black;
+}
+
+#nav-right {
+    background-color: orange;
+    border: 1px solid black;
+}
+
+.nav-item {
+    display: inline-block;
+}
+
