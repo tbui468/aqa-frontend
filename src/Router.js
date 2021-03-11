@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './index.css';
+import './router.css';
 
 import Main from './Main';
 import QuestionIndex from './QuestionIndex';
@@ -11,14 +12,35 @@ import Profile from './Profile';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
-//state should be saved here if avoiding re-rendering/mounting of components is necessary
 
 const Router = () => {
+    const [ faded, setFaded ] = useState(false);
+    const [ classes, setClasses ] = useState('');
+
+    useEffect(() => {
+        
+    }, [faded]);
+
+    const toggleFade = (e) => {
+        if(faded) {
+            setFaded(false);
+            setClasses('not-faded');
+        }else{ 
+            setFaded(true);
+            setClasses('faded');
+        }
+    };
+
+
     return (
         <BrowserRouter>
+            <div className={classes}>
+            </div>
             <NavBar />
             <Switch>
-                <Route exact path="/" component={Main} />
+                <Route exact path="/">
+                    <Main toggleFade={toggleFade} />
+                </Route>
                 <Route exact path="/questions">
                     <QuestionIndex />
                 </Route>

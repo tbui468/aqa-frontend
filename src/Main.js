@@ -7,7 +7,7 @@ import mainImage from './main.jpg';
 //when user clicks sign up button, signup box pops up on screen (still at main page)
 //signup should overlay on everything else (will make it animate later)
 
-const Main = () => {
+const Main = (props) => {
     const [ signup, setSignup ] = useState(false);
 
     useEffect(() => {
@@ -15,6 +15,7 @@ const Main = () => {
 
     const handleClick = () => {
         setSignup(!signup);
+        props.toggleFade();
     };
 
     return (
@@ -34,9 +35,9 @@ const Main = () => {
                     </div>
                 ) : (
                     <div>
-                        <button onClick={handleClick}>Signup</button>
                     </div>
                 )}
+                        <button onClick={handleClick}>Signup</button>
             </div>
         </div>
     ); 
