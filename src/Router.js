@@ -9,6 +9,7 @@ import QuestionForm from './QuestionForm'; //also serves as question edit
 import AnswerForm from './AnswerForm'; //also serves as answer edit
 import Profile from './Profile';
 import NavBar from './NavBar';
+import Footer from './Footer';
 
 //state should be saved here if avoiding re-rendering/mounting of components is necessary
 
@@ -28,6 +29,7 @@ const Router = () => {
                     <Profile />
                 </Route>
             </Switch>
+            <Footer />
         </BrowserRouter>
     );
 };

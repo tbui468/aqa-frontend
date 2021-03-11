@@ -1,0 +1,10 @@
+#footer-container {
+    text-align: center;
+    border: 1px solid black;
+}
+
+.footer-item {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+}
