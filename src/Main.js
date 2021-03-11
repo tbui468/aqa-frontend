@@ -24,7 +24,7 @@ const Main = () => {
             </div>
             <div id="main-right-child">
                 {signup ? (
-                    <div>
+                    <div id="main-signup-overlay">
                         <button onClick={handleClick}>close</button>
                         <Signup
                             title="Signup here"
