@@ -33,7 +33,7 @@ const Router = () => {
                 if (user) {
                     setUser({
                         username: user.user_name,
-                        email: user.user_email
+                        email: user.user_email,
                     });
                 }
             });
@@ -49,25 +49,27 @@ const Router = () => {
     };
 
     return (
-        <BrowserRouter>
-            <div className={classes} />
-            <NavBar setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
-            <Switch>
-                <Route exact path="/">
-                    <Main toggleFade={toggleFade} />
-                </Route>
-                <Route exact path="/questions">
-                    <QuestionIndex toggleFade={toggleFade} />
-                </Route>
-                <Route exact path="/questions/:question_id">
-                    <QuestionDetail toggleFade={toggleFade} />
-                </Route>
-                <Route exact path="/profile">
-                    <Profile user={user} loggedIn={loggedIn} />
-                </Route>
-            </Switch>
-            <Footer />
-        </BrowserRouter>
+        <div id="router-container">
+            <BrowserRouter>
+                <div className={classes} />
+                <NavBar setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
+                <Switch>
+                    <Route exact path="/">
+                        <Main toggleFade={toggleFade} />
+                    </Route>
+                    <Route exact path="/questions">
+                        <QuestionIndex toggleFade={toggleFade} />
+                    </Route>
+                    <Route exact path="/questions/:question_id">
+                        <QuestionDetail toggleFade={toggleFade} />
+                    </Route>
+                    <Route exact path="/profile">
+                        <Profile user={user} loggedIn={loggedIn} toggleFade={toggleFade} />
+                    </Route>
+                </Switch>
+                <Footer />
+            </BrowserRouter>
+        </div>
     );
 };
 

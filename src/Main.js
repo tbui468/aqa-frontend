@@ -16,11 +16,11 @@ const Main = (props) => {
         setSignupFormVisible(false);
         props.toggleFade();
     };
-
+/*
     const submitSignup = (e) => {
         e.preventDefault();
         alert('signup info submitted');
-    };
+    };*/
 
     /*
         //this is the signup info that needs to be given to PopupBox
@@ -40,7 +40,15 @@ const Main = (props) => {
                 <img id="main-image" src={mainImage} alt="main image" />
             </div>
             <div id="main-right-child">
-                <PopupBox onClose={closeSignup} onSubmit={submitSignup} visible={signupFormVisible} />
+                <PopupBox onClose={closeSignup} visible={signupFormVisible}
+                    forms={
+                        <Signup
+                            onSubmit={closeSignup}
+                            title="Signup here"
+                            method="POST"
+                            route={'http://localhost:3000/signup'}
+                        />
+                    }/>
                 <button id="main-signup-button" onClick={openSignup}>Signup</button>
             </div>
         </div>

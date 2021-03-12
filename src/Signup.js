@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 //check out Login.js to see how I did forms before
 //don't allow signup if email is already taken
 
-const Signup = () => {
+const Signup = (props) => {
     const [values, setValues] = useState({
         username: '',
         email: '',
@@ -50,7 +50,9 @@ const Signup = () => {
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).then((results) => {
             //            history.push('/login');
+            props.onSubmit();
         });
+
     };
 
     return (
