@@ -6,8 +6,6 @@ import './router.css';
 import Main from './Main';
 import QuestionIndex from './QuestionIndex';
 import QuestionDetail from './QuestionDetail';
-import QuestionForm from './QuestionForm'; //move to QuestionIndex page
-import AnswerForm from './AnswerForm'; //move to QuestionDetail page
 import Profile from './Profile';
 import NavBar from './NavBar';
 import Footer from './Footer';
