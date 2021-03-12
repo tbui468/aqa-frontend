@@ -20,14 +20,24 @@
     flex: 5;
     border: 1px solid black;
     background-color: green;
-    text-align: center;
 }
 
-#main-signup-overlay {
+#main-signup-button {
+    margin: 40%;
+}
+
+.main-signup-overlay {
+    padding: 15px;
+    opacity: 0.0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform:translate(-50%, -50%);
     color: white; background: #666666;
     z-index: 1000;
+    transition: all 0.5s ease;
+}
+
+.main-signup-visible {
+    opacity: 1.0;
 }

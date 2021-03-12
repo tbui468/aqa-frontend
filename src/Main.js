@@ -3,18 +3,25 @@ import Signup from './Signup';
 import './main.css';
 import mainImage from './main.jpg';
 
-//when user clicks sign up button, signup box pops up on screen (still at main page)
-//signup should overlay on everything else (will make it animate later)
-
 const Main = (props) => {
     const [signup, setSignup] = useState(false);
+    const [visible, setVisible] = useState('');
 
     useEffect(() => {
-    }, [signup]);
+    }, [signup, visible]);
 
-    const handleClick = () => {
-        setSignup(!signup);
+    const openSignup = () => {
+        if(signup) return;
+        setSignup(true);
         props.toggleFade();
+        setVisible('main-signup-visible')
+    };
+
+    const closeSignup = () => {
+        if(!signup) return;
+        setSignup(false);
+        props.toggleFade();
+        setVisible('')
     };
 
     return (
@@ -23,19 +30,15 @@ const Main = (props) => {
                 <img id="main-image" src={mainImage} alt="main image" />
             </div>
             <div id="main-right-child">
-                {signup ? (
-                    <div id="main-signup-overlay">
-                        <button onClick={handleClick}>close</button>
-                        <Signup
-                            title="Signup here"
-                            method="POST"
-                            route={'http://localhost:3000/signup'}
-                        />
-                    </div>
-                ) : (
-                    <div />
-                )}
-                <button onClick={handleClick}>Signup</button>
+                <div className={"main-signup-overlay " + visible}>
+                    <button onClick={closeSignup}>close</button>
+                    <Signup
+                        title="Signup here"
+                        method="POST"
+                        route={'http://localhost:3000/signup'}
+                    />
+                </div>
+                <button id="main-signup-button" onClick={openSignup}>Signup</button>
             </div>
         </div>
     );

@@ -43,10 +43,10 @@ const Router = () => {
 
 
     const toggleFade = (e) => {
-        if (classes === 'faded') {
-            setClasses('not-faded');
+        if (classes === 'router-black-overlay') {
+            setClasses('');
         } else {
-            setClasses('faded');
+            setClasses('router-black-overlay');
         }
     };
 
@@ -59,11 +59,11 @@ const Router = () => {
                     <Main toggleFade={toggleFade} />
                 </Route>
                 <Route exact path="/questions">
-                    <QuestionIndex />
+                    <QuestionIndex toggleFade={toggleFade} />
                 </Route>
-                <Route exact path="/questions/new" component={QuestionForm} />
-                <Route exact path="/questions/:question_id" component={QuestionDetail} />
-                <Route exact path="/questions/:question_id/answers/new" component={AnswerForm} />
+                <Route exact path="/questions/:question_id">
+                    <QuestionDetail toggleFade={toggleFade} />
+                </Route>
                 <Route exact path="/profile">
                     <Profile user={user} loggedIn={loggedIn} />
                 </Route>

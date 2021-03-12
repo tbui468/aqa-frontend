@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import PopupBox from './PopupBox';
+import { useParams } from 'react-router';
 
-const QuestionDetail = ({ match }) => {
+const QuestionDetail = (props) => {
+    const { question_id } = useParams();
     const history = useHistory();
     const [values, setValues] = useState({
         question: '',
@@ -10,8 +13,10 @@ const QuestionDetail = ({ match }) => {
         answers: [] //answers objects include answer, author, date (and later percent of votes)
     });
 
+    const [answerFormVisible, setAnswerFormVisible] = useState(false);
+
     useEffect(() => {
-        fetch('http://localhost:3000/questions/' + match.params.question_id)
+        fetch('http://localhost:3000/questions/' + question_id)
             .then((results) => {
                 return results.json();
             })
@@ -36,18 +41,34 @@ const QuestionDetail = ({ match }) => {
             });
     }, []);
 
+    const openAnswerForm = () => {
+        props.toggleFade();
+        setAnswerFormVisible(true);
+    };
+
+    const closeAnswerForm = () => {
+        props.toggleFade();
+        setAnswerFormVisible(false);
+    };
+
+    const submitAnswerForm = (e) => {
+        e.preventDefault();
+        alert('submitted');
+    };
+
 
     const handleClick = (e) => {
-        history.push('/questions/' + match.params.question_id + '/answers/new');
+        history.push('/questions/' + question_id + '/answers/new');
     };
 
     return (
         <div>
-            <h1>Question Detail Page for item: {match.params.id}</h1>
+            <h1>Question Detail Page for item: {question_id}</h1>
             <h2>{values.question}</h2>
             <p>{values.author}</p>
             <p>{values.date}</p>
-            <button onClick={handleClick}>Post New Answer</button>
+            <PopupBox onClose={closeAnswerForm} onSubmit={submitAnswerForm} visible={answerFormVisible} />
+            <button onClick={openAnswerForm}>Post New Answer</button>
             <ul>
                 {values.answers.map((item, index) => {
                     return (

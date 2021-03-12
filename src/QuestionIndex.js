@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import QuestionSummary from './QuestionSummary';
+import PopupBox from './PopupBox';
 
-const QuestionIndex = () => {
+const QuestionIndex = (props) => {
     const [questionSummaries, setQuestionSummaries] = useState([
         {
             id: 0,
@@ -11,6 +12,8 @@ const QuestionIndex = () => {
             date: ''
         }
     ]);
+
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
         fetch('http://localhost:3000/questions', {
@@ -37,9 +40,26 @@ const QuestionIndex = () => {
             });
     }, []); //empty update array so that fetch is only called on mount of component
 
+    const openQuestionForm = () => {
+        props.toggleFade();
+        setVisible(true);
+    };
+
+    const closeQuestionForm = () => {
+        props.toggleFade();
+        setVisible(false);
+    };
+
+    const submitQuestionForm = (e) => {
+        e.preventDefault();
+        alert('submitted');
+        //upload a question here using data from 
+    }
+
     return (
         <div>
-            <Link to="/questions/new">Post New Question</Link>
+            <PopupBox onClose={closeQuestionForm} onSubmit={submitQuestionForm} visible={visible} />
+            <button onClick={openQuestionForm}>New question</button>
             <ul>
                 {questionSummaries.map((item, index) => {
                     return (
