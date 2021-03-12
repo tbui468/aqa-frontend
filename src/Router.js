@@ -6,37 +6,54 @@ import './router.css';
 import Main from './Main';
 import QuestionIndex from './QuestionIndex';
 import QuestionDetail from './QuestionDetail';
-import QuestionForm from './QuestionForm'; //also serves as question edit
-import AnswerForm from './AnswerForm'; //also serves as answer edit
+import QuestionForm from './QuestionForm'; //move to QuestionIndex page
+import AnswerForm from './AnswerForm'; //move to QuestionDetail page
 import Profile from './Profile';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
 
 const Router = () => {
-    const [ faded, setFaded ] = useState(false);
-    const [ classes, setClasses ] = useState('');
+    const [classes, setClasses] = useState('');
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [user, setUser] = useState({
+        username: '',
+        email: ''
+    });
+
 
     useEffect(() => {
-        
-    }, [faded]);
+        fetch('http://localhost:3000/profile', {
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'include'
+        })
+            .then((result) => {
+                return result.json(); //why is this this necessary? (Why can't it be combined with the next step?)
+            })
+            .then((user) => {
+                if (user) {
+                    setUser({
+                        username: user.user_name,
+                        email: user.user_email
+                    });
+                }
+            });
+    }, [loggedIn]);
+
 
     const toggleFade = (e) => {
-        if(faded) {
-            setFaded(false);
+        if (classes === 'faded') {
             setClasses('not-faded');
-        }else{ 
-            setFaded(true);
+        } else {
             setClasses('faded');
         }
     };
 
-
     return (
         <BrowserRouter>
-            <div className={classes}>
-            </div>
-            <NavBar />
+            <div className={classes} />
+            <NavBar setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
             <Switch>
                 <Route exact path="/">
                     <Main toggleFade={toggleFade} />
@@ -48,7 +65,7 @@ const Router = () => {
                 <Route exact path="/questions/:question_id" component={QuestionDetail} />
                 <Route exact path="/questions/:question_id/answers/new" component={AnswerForm} />
                 <Route exact path="/profile">
-                    <Profile />
+                    <Profile user={user} loggedIn={loggedIn} />
                 </Route>
             </Switch>
             <Footer />

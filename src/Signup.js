@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 
 //need to access db and create new user
 //check out Login.js to see how I did forms before
@@ -12,7 +12,7 @@ const Signup = () => {
         password: ''
     });
 
-    const history = useHistory();
+    //   const history = useHistory();
 
     const handleUsernameChange = (e) => {
         setValues((values) => ({
@@ -49,7 +49,7 @@ const Signup = () => {
             body: JSON.stringify(data),
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).then((results) => {
-//            history.push('/login');
+            //            history.push('/login');
         });
     };
 

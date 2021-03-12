@@ -17,7 +17,7 @@ const QuestionIndex = () => {
             method: 'GET',
             mode: 'cors',
             credentials: 'include'
-            })
+        })
             .then((result) => {
                 return result.json();
             })

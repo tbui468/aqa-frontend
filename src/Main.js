@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Signup from './Signup';
 import './main.css';
 import mainImage from './main.jpg';
@@ -8,7 +7,7 @@ import mainImage from './main.jpg';
 //signup should overlay on everything else (will make it animate later)
 
 const Main = (props) => {
-    const [ signup, setSignup ] = useState(false);
+    const [signup, setSignup] = useState(false);
 
     useEffect(() => {
     }, [signup]);
@@ -31,16 +30,15 @@ const Main = (props) => {
                             title="Signup here"
                             method="POST"
                             route={'http://localhost:3000/signup'}
-                            />
+                        />
                     </div>
                 ) : (
-                    <div>
-                    </div>
+                    <div />
                 )}
-                        <button onClick={handleClick}>Signup</button>
+                <button onClick={handleClick}>Signup</button>
             </div>
         </div>
-    ); 
+    );
 };
 
 export default Main;

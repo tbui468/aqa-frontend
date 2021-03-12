@@ -1,35 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './navBar.css';
 //one option: each time Navbar is created, check logged in status
 
-const NavBar = () => {
+const NavBar = (props) => {
     const history = useHistory();
 
     const [values, setValues] = useState({
         username: '',
         password: ''
     });
-    const [loggedIn, setLoggedIn] = useState(false);
-
-    useEffect(() => {
-        fetch('http://localhost:3000/profile', {
-            method: 'GET',
-            mode: 'cors',
-            credentials: 'include'
-        })
-            .then((result) => {
-                return result.json();
-            })
-            .then((json) => {
-                console.log(json);
-                if (json.user_name !== undefined) {
-                    setLoggedIn(true);
-                } else {
-                    setLoggedIn(false);
-                }
-            });
-    }, [loggedIn]); //dom should re-render everytime loggedIn state changes
 
 
     const handleUsernameChange = (e) => {
@@ -50,7 +30,6 @@ const NavBar = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const data = {
             username: e.target.username.value,
             password: e.target.password.value
@@ -63,7 +42,11 @@ const NavBar = () => {
             body: JSON.stringify(data),
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).then((results) => {
-            setLoggedIn(true);
+            if(results.status === 200) {
+               props.setLoggedIn(true);
+            }
+        }).catch((err) => {
+            console.log('error');
         });
     };
 
@@ -74,7 +57,7 @@ const NavBar = () => {
             mode: 'cors',
             credentials: 'include'
         }).then((results) => {
-            setLoggedIn(false);
+            props.setLoggedIn(false);
             history.push('/');
         });
     };
@@ -87,7 +70,7 @@ const NavBar = () => {
                 </li>
             </div>
             <div id="nav-right">
-                {loggedIn ? (
+                {props.loggedIn ? (
                     <div>
                         <li className="nav-item">
                             <Link to="/profile">Profile</Link>
@@ -118,7 +101,7 @@ const NavBar = () => {
                                 value={values.password}
                                 onChange={handlePasswordChange}
                             />
-                            <button type='submit'>Login</button>
+                            <button type="submit">Login</button>
                         </form>
                     </li>
                 )}
