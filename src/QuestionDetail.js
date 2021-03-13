@@ -42,12 +42,12 @@ const QuestionDetail = (props) => {
     }, []);
 
     const openAnswerForm = () => {
-        props.toggleFade();
+        props.toggleOverlay();
         setAnswerFormVisible(true);
     };
 
     const closeAnswerForm = () => {
-        props.toggleFade();
+        props.toggleOverlay();
         setAnswerFormVisible(false);
     };
 

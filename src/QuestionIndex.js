@@ -43,19 +43,19 @@ const QuestionIndex = (props) => {
     }, []); //empty update array so that fetch is only called on mount of component
 
     const openQuestionForm = () => {
-        props.toggleFade();
+        props.toggleOverlay();
         setVisible(true);
     };
 
     const closeQuestionForm = () => {
-        props.toggleFade();
+        props.toggleOverlay();
         setVisible(false);
     };
 
 
     return (
         <div>
-            <PopupBox onClose={closeQuestionForm} visible={visible} 
+            <PopupBox onClose={closeQuestionForm} visible={visible}
                 forms={
                     <QuestionForm
                         onSubmit={closeQuestionForm}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import './navBar.css';
 //one option: each time Navbar is created, check logged in status
 
@@ -10,7 +10,6 @@ const NavBar = (props) => {
         username: '',
         password: ''
     });
-
 
     const handleUsernameChange = (e) => {
         e.persist();
@@ -28,40 +27,6 @@ const NavBar = (props) => {
         }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const data = {
-            username: e.target.username.value,
-            password: e.target.password.value
-        };
-
-        fetch('http://localhost:3000/login', {
-            method: 'POST',
-            mode: 'cors',
-            credentials: 'include',
-            body: JSON.stringify(data),
-            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
-        }).then((results) => {
-            if(results.status === 200) {
-               props.setLoggedIn(true);
-            }
-        }).catch((err) => {
-            console.log('error');
-        });
-    };
-
-
-    const logout = () => {
-        fetch('http://localhost:3000/logout', {
-            method: 'GET',
-            mode: 'cors',
-            credentials: 'include'
-        }).then((results) => {
-            props.setLoggedIn(false);
-            history.push('/');
-        });
-    };
-
     return (
         <ul id="nav-container">
             <div id="nav-left">
@@ -70,18 +35,18 @@ const NavBar = (props) => {
                 </li>
             </div>
             <div id="nav-right">
-                {props.loggedIn ? (
+                {props.user ? (
                     <div>
                         <li className="nav-item">
                             <Link to="/profile">Profile</Link>
                         </li>
                         <li className="nav-item">
-                            <button onClick={logout}>Log out</button>
+                            <button onClick={props.logout}>Log out</button>
                         </li>
                     </div>
                 ) : (
                     <li className="nav-item">
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={props.login}>
                             <input
                                 type="text"
                                 name="username"

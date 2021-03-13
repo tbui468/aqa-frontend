@@ -3,7 +3,6 @@ import AccessDenied from './AccessDenied';
 import PopupBox from './PopupBox';
 
 const Profile = (props) => {
-
     const [editFormVisible, setEditFormVisible] = useState(false);
 
     const openEditForm = () => {
@@ -19,7 +18,7 @@ const Profile = (props) => {
     return (
         <div>
             <PopupBox onClose={closeEditForm} visible={editFormVisible} />
-            {props.loggedIn ? (
+            {props.user ? (
                 <div>
                     <h1>Profile page</h1>
                     <p>Name: {props.user.username}</p>

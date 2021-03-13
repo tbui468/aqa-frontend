@@ -52,7 +52,6 @@ const Signup = (props) => {
             //            history.push('/login');
             props.onSubmit();
         });
-
     };
 
     return (

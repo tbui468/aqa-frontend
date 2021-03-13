@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import './index.css';
 import './router.css';
 
 import Main from './Main';
@@ -11,14 +10,8 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 
 
-const Router = () => {
-    const [classes, setClasses] = useState('');
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [user, setUser] = useState({
-        username: '',
-        email: ''
-    });
-
+const Router = (props) => {
+    /*
 
     useEffect(() => {
         fetch('http://localhost:3000/profile', {
@@ -37,39 +30,28 @@ const Router = () => {
                     });
                 }
             });
-    }, [loggedIn]);
+    },[]);*/
 
-
-    const toggleFade = (e) => {
-        if (classes === 'router-black-overlay') {
-            setClasses('');
-        } else {
-            setClasses('router-black-overlay');
-        }
-    };
 
     return (
-        <div id="router-container">
-            <BrowserRouter>
-                <div className={classes} />
-                <NavBar setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
-                <Switch>
-                    <Route exact path="/">
-                        <Main toggleFade={toggleFade} />
-                    </Route>
-                    <Route exact path="/questions">
-                        <QuestionIndex toggleFade={toggleFade} />
-                    </Route>
-                    <Route exact path="/questions/:question_id">
-                        <QuestionDetail toggleFade={toggleFade} />
-                    </Route>
-                    <Route exact path="/profile">
-                        <Profile user={user} loggedIn={loggedIn} toggleFade={toggleFade} />
-                    </Route>
-                </Switch>
-                <Footer />
-            </BrowserRouter>
-        </div>
+        <BrowserRouter>
+            <NavBar user={props.user} login={props.login} logout={props.logout} />
+            <Switch>
+                <Route exact path="/">
+                    <Main toggleOverlay={props.toggleOverlay} />
+                </Route>
+                <Route exact path="/questions">
+                    <QuestionIndex toggleOverlay={props.toggleOverlay} />
+                </Route>
+                <Route exact path="/questions/:question_id">
+                    <QuestionDetail toggleOverlay={props.toggleOverlay} />
+                </Route>
+                <Route exact path="/profile">
+                    <Profile user={props.user} toggleOverlay={props.toggleOverlay} />
+                </Route>
+            </Switch>
+            <Footer />
+        </BrowserRouter>
     );
 };
 

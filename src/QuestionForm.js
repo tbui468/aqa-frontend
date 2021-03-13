@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 
 const QuestionForm = (props) => {
     const [values, setValues] = useState({
-        text: '',
+        text: ''
     });
 
     //   const history = useHistory();
@@ -36,7 +36,6 @@ const QuestionForm = (props) => {
         }).then((results) => {
             props.onSubmit();
         });
-
     };
 
     return (

@@ -9,30 +9,13 @@ const Main = (props) => {
 
     const openSignup = () => {
         setSignupFormVisible(true);
-        props.toggleFade();
+        props.toggleOverlay();
     };
 
     const closeSignup = () => {
         setSignupFormVisible(false);
-        props.toggleFade();
+        props.toggleOverlay();
     };
-/*
-    const submitSignup = (e) => {
-        e.preventDefault();
-        alert('signup info submitted');
-    };*/
-
-    /*
-        //this is the signup info that needs to be given to PopupBox
-                <div className={"main-signup-overlay " + visible}>
-                    <button onClick={closeSignup}>close</button>
-                    <Signup
-                        title="Signup here"
-                        method="POST"
-                        route={'http://localhost:3000/signup'}
-                    />
-                </div>
-     */
 
     return (
         <div id="main-container">
