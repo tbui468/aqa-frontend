@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import PopupBox from './PopupBox';
 import { useParams } from 'react-router';
+import AnswerForm from './AnswerForm';
 
 const QuestionDetail = (props) => {
     const { question_id } = useParams();
@@ -56,7 +57,6 @@ const QuestionDetail = (props) => {
         alert('submitted');
     };
 
-
     const handleClick = (e) => {
         history.push('/questions/' + question_id + '/answers/new');
     };
@@ -67,8 +67,12 @@ const QuestionDetail = (props) => {
             <h2>{values.question}</h2>
             <p>{values.author}</p>
             <p>{values.date}</p>
-            <PopupBox onClose={closeAnswerForm} onSubmit={submitAnswerForm} visible={answerFormVisible} />
-            <button onClick={openAnswerForm}>Post New Answer</button>
+            <PopupBox onClose={closeAnswerForm} onSubmit={submitAnswerForm} visible={answerFormVisible} 
+                forms={
+                    <AnswerForm />
+                }
+            />
+            {props.user ? (<button onClick={openAnswerForm}>Post New Answer</button>) : (<div></div>)}
             <ul>
                 {values.answers.map((item, index) => {
                     return (

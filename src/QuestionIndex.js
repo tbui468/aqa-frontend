@@ -65,7 +65,7 @@ const QuestionIndex = (props) => {
                     />
                 }
             />
-            <button onClick={openQuestionForm}>New question</button>
+            {props.user ? (<button onClick={openQuestionForm}>New question</button>) : (<div></div>)}
             <ul>
                 {questionSummaries.map((item, index) => {
                     return (

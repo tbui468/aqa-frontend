@@ -19,10 +19,10 @@ const Router = (props) => {
                     <Main toggleOverlay={props.toggleOverlay} />
                 </Route>
                 <Route exact path="/questions">
-                    <QuestionIndex toggleOverlay={props.toggleOverlay} />
+                    <QuestionIndex toggleOverlay={props.toggleOverlay} user={props.user} />
                 </Route>
                 <Route exact path="/questions/:question_id">
-                    <QuestionDetail toggleOverlay={props.toggleOverlay} />
+                    <QuestionDetail toggleOverlay={props.toggleOverlay} user={props.user} />
                 </Route>
                 <Route exact path="/profile">
                     <Profile user={props.user} toggleOverlay={props.toggleOverlay} />

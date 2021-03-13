@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
-//import { useHistory } from 'react-router-dom';
-
-//need to access db and create new user
-//check out Login.js to see how I did forms before
-//don't allow signup if email is already taken
 
 const QuestionForm = (props) => {
     const [values, setValues] = useState({
         text: ''
     });
-
-    //   const history = useHistory();
 
     const handleTextChange = (e) => {
         setValues((values) => ({
