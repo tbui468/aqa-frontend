@@ -7,12 +7,12 @@ const Profile = (props) => {
 
     const openEditForm = () => {
         setEditFormVisible(true);
-        props.toggleFade();
+        props.toggleOverlay();
     };
 
     const closeEditForm = () => {
         setEditFormVisible(false);
-        props.toggleFade();
+        props.toggleOverlay();
     };
 
     return (

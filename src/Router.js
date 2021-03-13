@@ -11,28 +11,6 @@ import Footer from './Footer';
 
 
 const Router = (props) => {
-    /*
-
-    useEffect(() => {
-        fetch('http://localhost:3000/profile', {
-            method: 'GET',
-            mode: 'cors',
-            credentials: 'include'
-        })
-            .then((result) => {
-                return result.json(); //why is this this necessary? (Why can't it be combined with the next step?)
-            })
-            .then((user) => {
-                if (user) {
-                    setUser({
-                        username: user.user_name,
-                        email: user.user_email,
-                    });
-                }
-            });
-    },[]);*/
-
-
     return (
         <BrowserRouter>
             <NavBar user={props.user} login={props.login} logout={props.logout} />

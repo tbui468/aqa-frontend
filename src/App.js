@@ -9,6 +9,30 @@ const App = () => {
     const [overlayClass, setOverlayClass] = useState('');
     const [user, setUser] = useState(null);
 
+    useEffect(() => {
+        authenticateUser();
+    }, []);
+
+    const authenticateUser = () => {
+        fetch('http://localhost:3000/profile', {
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'include'
+        })
+            .then((result) => {
+                return result.json(); //why is this this necessary? (Why can't it be combined with the next step?)
+            })
+            .then((result) => {
+                if (result.user_name) {
+                    setUser({
+                        username: result.user_name,
+                        email: result.user_email,
+                    });
+                }else{
+                    setUser(null);
+                }
+            });
+    }
 
     const login = (e) => {
         e.preventDefault();
@@ -25,6 +49,7 @@ const App = () => {
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).then((results) => {
             if (results.status === 200) {
+                authenticateUser();
                 //successful login
             }
         }).catch((err) => {
