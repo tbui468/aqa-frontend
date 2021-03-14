@@ -5,6 +5,9 @@ import { useParams } from 'react-router';
 import AnswerForm from './AnswerForm';
 
 const QuestionDetail = (props) => {
+    //questions/:question_id/answers/:answer_id/votes   -> POST here to create/update votes
+    //questions/:question_id/answers/:answer_id/votes   -> GET here to get all votes for a given answer
+    //votes need to go to a particular answer....
     const { question_id } = useParams();
     const history = useHistory();
     const [values, setValues] = useState({
@@ -33,7 +36,9 @@ const QuestionDetail = (props) => {
                         answer: json.answers[i].answer_text,
                         author: json.answers[i].user_name,
                         percent: json.answers[i].answer_percent * 100,
-                        date: json.answers[i].answer_date
+                        date: json.answers[i].answer_date,
+                        vote: json.answers[i].vote_id,
+                        answer_id: json.answers[i].answer_id
                     };
                     arr.push(obj);
                 }
@@ -69,6 +74,18 @@ const QuestionDetail = (props) => {
         });
     };
 
+    const voteFor = (e) => {
+        e.preventDefault();
+        const answer_id = e.target.answer_id.value;
+        fetch('http://localhost:3000/questions/' + question_id + '/answers/' + answer_id + '/votes', {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include'
+        }).then((result) => {
+            getDetails();
+        });
+    }
+
     return (
         <div>
             <h1>Question Detail Page for item: {question_id}</h1>
@@ -86,10 +103,21 @@ const QuestionDetail = (props) => {
             <ul>
                 {values.answers.map((item, index) => {
                     return (
-                        <li key={index}>
+                        <li key={item.answer_id}>
                             <p>Answer: {item.answer} with {item.percent}% of weighted votes</p>
                             <p>by: {item.author}</p>
                             <p>date posted: {item.date}</p>
+                            <p>vote: {item.vote}</p>
+                            {props.user ? (
+                                <form onSubmit={voteFor}>
+                                    <input name="answer_id" value={item.answer_id} hidden />
+                                    <button type="submit" >Vote</button>
+                                </form>
+                            ) : (
+                                <div></div>
+                            )}
+                            <p>id: {item.answer_id}</p>
+                            <br/>
                         </li>
                     );
                 })}
