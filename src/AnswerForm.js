@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const AnswerForm = () => {
+const AnswerForm = (props) => {
     const [text, setText] = useState('');
 
     const handleTextChange = (e) => {
@@ -9,7 +9,12 @@ const AnswerForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //post to api
+
+        const data = {
+            text: e.target.text.value
+        };
+
+        props.onSubmit(data);
     };
 
     return (

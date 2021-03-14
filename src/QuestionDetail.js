@@ -17,6 +17,10 @@ const QuestionDetail = (props) => {
     const [answerFormVisible, setAnswerFormVisible] = useState(false);
 
     useEffect(() => {
+        getDetails();
+    }, []);
+
+    const getDetails = () => {
         fetch('http://localhost:3000/questions/' + question_id)
             .then((results) => {
                 return results.json();
@@ -40,7 +44,7 @@ const QuestionDetail = (props) => {
                     answers: arr
                 }));
             });
-    }, []);
+    };
 
     const openAnswerForm = () => {
         props.toggleOverlay();
@@ -52,13 +56,17 @@ const QuestionDetail = (props) => {
         setAnswerFormVisible(false);
     };
 
-    const submitAnswerForm = (e) => {
-        e.preventDefault();
-        alert('submitted');
-    };
-
-    const handleClick = (e) => {
-        history.push('/questions/' + question_id + '/answers/new');
+    const submitAnswerForm = (data) => {
+        fetch('http://localhost:3000/questions/' + question_id + '/answers', {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        }).then((result) => {
+            closeAnswerForm();
+            getDetails();
+        });
     };
 
     return (
@@ -67,10 +75,12 @@ const QuestionDetail = (props) => {
             <h2>{values.question}</h2>
             <p>{values.author}</p>
             <p>{values.date}</p>
-            <PopupBox onClose={closeAnswerForm} onSubmit={submitAnswerForm} visible={answerFormVisible} 
-                forms={
-                    <AnswerForm />
-                }
+            <PopupBox onClose={closeAnswerForm} visible={answerFormVisible} 
+            forms={
+                <AnswerForm
+                onSubmit={submitAnswerForm}
+                />
+            }
             />
             {props.user ? (<button onClick={openAnswerForm}>Post New Answer</button>) : (<div></div>)}
             <ul>

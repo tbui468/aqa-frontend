@@ -59,9 +59,6 @@ const QuestionIndex = (props) => {
                 forms={
                     <QuestionForm
                         onSubmit={closeQuestionForm}
-                        title="Post question here"
-                        method="POST"
-                        route={'http://localhost:3000/signup'}
                     />
                 }
             />
