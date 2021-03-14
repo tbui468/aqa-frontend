@@ -18,6 +18,10 @@ const QuestionIndex = (props) => {
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
+        updateIndex();
+    }, []);
+
+    const updateIndex = () => {
         fetch('http://localhost:3000/questions', {
             method: 'GET',
             mode: 'cors',
@@ -40,7 +44,7 @@ const QuestionIndex = (props) => {
                 }
                 setQuestionSummaries(arr);
             });
-    }, []); //empty update array so that fetch is only called on mount of component
+    };
 
     const openQuestionForm = () => {
         props.toggleOverlay();
@@ -52,13 +56,26 @@ const QuestionIndex = (props) => {
         setVisible(false);
     };
 
+    const submitQuestionForm = (data) => {
+        fetch('http://localhost:3000/questions', {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include',
+            body: JSON.stringify(data),
+            headers: {'Content-Type': 'application/json; charset=UTF-8' }
+        }).then((result) => {
+            closeQuestionForm();
+            updateIndex();
+        });
+    };
+
 
     return (
         <div>
             <PopupBox onClose={closeQuestionForm} visible={visible}
                 forms={
                     <QuestionForm
-                        onSubmit={closeQuestionForm}
+                        onSubmit={submitQuestionForm}
                     />
                 }
             />

@@ -78,7 +78,7 @@ const QuestionDetail = (props) => {
             <PopupBox onClose={closeAnswerForm} visible={answerFormVisible} 
             forms={
                 <AnswerForm
-                onSubmit={submitAnswerForm}
+                    onSubmit={submitAnswerForm}
                 />
             }
             />

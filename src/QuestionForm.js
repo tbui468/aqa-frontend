@@ -20,15 +20,7 @@ const QuestionForm = (props) => {
             topic: e.target.topic.value
         };
 
-        fetch('http://localhost:3000/questions', {
-            method: 'POST',
-            mode: 'cors',
-            credentials: 'include',
-            body: JSON.stringify(data),
-            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
-        }).then((results) => {
-            props.onSubmit();
-        });
+        props.onSubmit(data);
     };
 
     return (
