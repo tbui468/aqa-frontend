@@ -24,7 +24,11 @@ const QuestionDetail = (props) => {
     }, []);
 
     const getDetails = () => {
-        fetch('http://localhost:3000/questions/' + question_id)
+        fetch('http://localhost:3000/questions/' + question_id, {
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'include'
+        })
             .then((results) => {
                 return results.json();
             })
@@ -37,7 +41,7 @@ const QuestionDetail = (props) => {
                         author: json.answers[i].user_name,
                         percent: json.answers[i].answer_percent * 100,
                         date: json.answers[i].answer_date,
-                        vote: json.answers[i].vote_id,
+                        vote: json.answers[i].voted.toString(),
                         answer_id: json.answers[i].answer_id
                     };
                     arr.push(obj);
