@@ -68,11 +68,11 @@ const App = () => {
         });
     };
 
-    const toggleOverlay = (e) => {
-        if (overlayClass === 'app-overlay') {
-            setOverlayClass('');
-        } else {
+    const toggleOverlay = () => {
+        if(overlayClass === '') {
             setOverlayClass('app-overlay');
+        }else{
+            setOverlayClass('');
         }
     };
 

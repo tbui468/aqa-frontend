@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import QuestionSummary from './QuestionSummary';
 import PopupBox from './PopupBox';
 import QuestionForm from './QuestionForm';
+import './questionIndex.css';
 
 const QuestionIndex = (props) => {
     const [questionSummaries, setQuestionSummaries] = useState([
@@ -79,22 +80,25 @@ const QuestionIndex = (props) => {
                     />
                 }
             />
-            {props.user ? (<button onClick={openQuestionForm}>New question</button>) : (<div></div>)}
-            <ul>
-                {questionSummaries.map((item, index) => {
-                    return (
-                        <li key={index}>
-                            <QuestionSummary
-                                id={item.id.toString()}
-                                question={item.question}
-                                topic={item.topic}
-                                author={item.author}
-                                date={item.date}
-                            />
-                        </li>
-                    );
-                })}
-            </ul>
+            <section className="question-index-container">
+                <h1>Newest Questions</h1>
+                {props.user ? (<button onClick={openQuestionForm}>New question</button>) : (<div></div>)}
+                <ul>
+                    {questionSummaries.map((item, index) => {
+                        return (
+                            <li key={index}>
+                                <QuestionSummary
+                                    id={item.id.toString()}
+                                    question={item.question}
+                                    topic={item.topic}
+                                    author={item.author}
+                                    date={item.date}
+                                />
+                            </li>
+                        );
+                    })}
+                </ul>
+            </section>
         </div>
     );
 };

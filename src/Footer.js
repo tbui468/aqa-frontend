@@ -9,7 +9,7 @@ const Footer = () => {
             <a className="footer-item" href="#">Terms of Service</a>
             <a className="footer-item" href="#">Privacy Policy</a>
             <a className="footer-item" href="#">Settings</a>
-            <a className="footer-item" href="#">Marketing</a>
+            <a className="footer-item" href="#">&copy;Waqa</a>
         </div>
     );
 };

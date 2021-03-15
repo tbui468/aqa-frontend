@@ -47,11 +47,67 @@ table {
 	border-spacing: 0;
 }
 
-#nav-bar {
-    background-color: green;
+/*
+ ***********app fonts****************
+ */
+body {
+    color: #888; /* this gray color looks a lot better for text on white backgrounds*/
+    font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.nav-item {
-    background-color: blue;
-    display: inline-block;
+h1, h2, h3, h4 {
+    color: #648880; /* greenish color for headers */
 }
+
+
+h1 {
+    font-size: 36px;
+    line-height: 44px;
+}
+
+h2 {
+    font-size: 24px;
+    line-height: 44px;
+}
+
+
+h3 {
+    font-size: 21px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+h5 {
+    color: #a9b2b9;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+strong { /* specifying them again after reset got rid of it*/
+    font-weight: 400;
+}
+
+cite, em {
+    font-style: italic;
+}
+
+/*
+ *****************LINKS**********************
+ */
+
+a {
+    color: #648880;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #a9b2b9;
+}
+
+p a {
+    bottom-border: 1px solid #dfe2e5;
+}
+
