@@ -19,7 +19,7 @@ const QuestionDetail = (props) => {
     const [answerFormVisible, setAnswerFormVisible] = useState(false);
 
     useEffect(() => {
-        getDetails();
+        getDetails(); //this needs to be called when user logs in 
     }, []);
 
     const getDetails = () => {

@@ -13,6 +13,10 @@ const App = () => {
         authenticateUser();
     }, []);
 
+    useEffect(() => {
+
+    }, [user]);
+
     const authenticateUser = () => {
         fetch('http://localhost:3000/profile', {
             method: 'GET',
