@@ -38,7 +38,6 @@ const QuestionIndex = (props) => {
                         id: json[i].question_id,
                         question: json[i].question_text,
                         topic: json[i].question_topic,
-                        author: json[i].user_name,
                         date: json[i].question_date
                     };
                     arr.push(s);
@@ -91,7 +90,6 @@ const QuestionIndex = (props) => {
                                     id={item.id.toString()}
                                     question={item.question}
                                     topic={item.topic}
-                                    author={item.author}
                                     date={item.date}
                                 />
                             </li>

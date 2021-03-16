@@ -101,7 +101,7 @@ const QuestionDetail = (props) => {
             />
             <section className="question-detail-question">
                 <section className="question-detail-question-text">
-                    <h1>{values.question}</h1>
+                    <h1 dangerouslySetInnerHTML={{__html: values.question}} />
                     <h2>{values.topic}</h2>
                     <p>{values.date}</p>
                 </section>
@@ -116,7 +116,7 @@ const QuestionDetail = (props) => {
                             <section className="question-detail-answer">
                                 <li key={item.answer_id}>
                                     <section className="question-detail-answer-text">
-                                        <h3>{item.answer}</h3>
+                                        <h3 dangerouslySetInnerHTML={{__html: item.answer}} />
                                         <p>{item.percent}% of weighted votes</p>
                                         <p>{item.date}</p>
                                     </section>
