@@ -12,7 +12,8 @@ const QuestionDetail = (props) => {
         question: '',
         topic: '',
         author: '',
-        owns: false,
+        owns: false, //whether user wrote the question or not
+        answered: false, //whether user has answered this question (once) or not
         date: '',
         answers: [] //answers objects include answer, author, date (and later percent of votes)
     });
@@ -35,6 +36,7 @@ const QuestionDetail = (props) => {
             .then((json) => {
                 //process array of answers here
                 let arr = [];
+                let alreadyAnswered = false;
                 for (let i = 0; i < json.answers.length; i++) {
                     let obj = {
                         answer: json.answers[i].answer_text,
@@ -45,6 +47,7 @@ const QuestionDetail = (props) => {
                         owns: json.answers[i].owns, //if true, disable vote button for that answer
                         answer_id: json.answers[i].answer_id
                     };
+                    if(json.answers[i].owns) alreadyAnswered = true;
                     arr.push(obj);
                 }
                 setValues((values) => ({
@@ -53,6 +56,7 @@ const QuestionDetail = (props) => {
                     author: json.question.user_name,
                     date: json.question.question_date,
                     owns: json.question.owns, //if true, disable post answer button
+                    answered: alreadyAnswered,
                     answers: arr
                 }));
             });
@@ -109,7 +113,7 @@ const QuestionDetail = (props) => {
                     <p>{values.date}</p>
                 </section>
                 <section className="question-detail-answer-button">
-                {props.user ? (<button className="new-answer-button" onClick={openAnswerForm} disabled={values.owns}>Post New Answer</button>) : (<div></div>)}
+                {props.user ? (<button className="new-answer-button" onClick={openAnswerForm} disabled={values.owns || values.answered}>Post New Answer</button>) : (<div></div>)}
                 </section>
             </section>
             <section className="question-detail-answers">
