@@ -20,7 +20,7 @@ const QuestionDetail = (props) => {
 
     useEffect(() => {
         getDetails(); //this needs to be called when user logs in 
-    }, []);
+    }, [values]);
 
     const getDetails = () => {
         fetch('http://localhost:3000/questions/' + question_id, {
@@ -41,6 +41,7 @@ const QuestionDetail = (props) => {
                         percent: Math.round(json.answers[i].answer_percent * 10000) / 100,
                         date: json.answers[i].answer_date,
                         vote: json.answers[i].voted,
+                        owns: json.answers[i].owns, //if true, disable vote button for that answer
                         answer_id: json.answers[i].answer_id
                     };
                     arr.push(obj);
@@ -123,7 +124,7 @@ const QuestionDetail = (props) => {
                                     {props.user ? (
                                         <form onSubmit={voteFor} className="question-detail-vote-form">
                                             <input name="answer_id" value={item.answer_id} hidden />
-                                            <button className={item.vote ? "vote-button vote-active" : "vote-button vote-inactive"} type="submit" >Vote</button>
+                                            <button className={item.vote ? "vote-button vote-active" : "vote-button vote-inactive"} type="submit" disabled={item.owns}>Vote</button>
                                         </form>
                                     ) : (
                                         <div className="question-detail-vote-form"></div>

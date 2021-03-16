@@ -49,11 +49,16 @@
     padding: 5px 10px;
 }
 
+
 .vote-active:hover {
     background-color: lightgreen;
 }
 .vote-inactive:hover, .new-answer-button:hover {
     background-color: lightgrey;
+}
+
+.vote-button:disabled {
+    background-color: darkgrey;
 }
 
 .vote-active {
