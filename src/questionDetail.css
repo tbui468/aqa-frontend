@@ -57,8 +57,8 @@
     background-color: lightgrey;
 }
 
-.vote-button:disabled {
-    background-color: darkgrey;
+.vote-button:disabled, .new-answer-button:disabled {
+    background-color: lightgrey;
 }
 
 .vote-active {

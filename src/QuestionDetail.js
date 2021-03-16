@@ -12,6 +12,7 @@ const QuestionDetail = (props) => {
         question: '',
         topic: '',
         author: '',
+        owns: false,
         date: '',
         answers: [] //answers objects include answer, author, date (and later percent of votes)
     });
@@ -51,6 +52,7 @@ const QuestionDetail = (props) => {
                     topic: json.question.question_topic,
                     author: json.question.user_name,
                     date: json.question.question_date,
+                    owns: json.question.owns, //if true, disable post answer button
                     answers: arr
                 }));
             });
@@ -107,7 +109,7 @@ const QuestionDetail = (props) => {
                     <p>{values.date}</p>
                 </section>
                 <section className="question-detail-answer-button">
-                {props.user ? (<button className="new-answer-button" onClick={openAnswerForm}>Post New Answer</button>) : (<div></div>)}
+                {props.user ? (<button className="new-answer-button" onClick={openAnswerForm} disabled={values.owns}>Post New Answer</button>) : (<div></div>)}
                 </section>
             </section>
             <section className="question-detail-answers">
