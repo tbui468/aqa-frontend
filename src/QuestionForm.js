@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const QuestionForm = (props) => {
     const [values, setValues] = useState({
@@ -48,6 +49,10 @@ const QuestionForm = (props) => {
             </form>
         </div>
     );
+};
+
+QuestionForm.propTypes = {
+    onSubmit: PropTypes.func
 };
 
 export default QuestionForm;

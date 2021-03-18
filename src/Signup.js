@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-//import { useHistory } from 'react-router-dom';
-
-//need to access db and create new user
-//check out Login.js to see how I did forms before
-//don't allow signup if email is already taken
+import PropTypes from 'prop-types';
 
 const Signup = (props) => {
     const [values, setValues] = useState({
@@ -11,8 +7,6 @@ const Signup = (props) => {
         email: '',
         password: ''
     });
-
-    //   const history = useHistory();
 
     const handleUsernameChange = (e) => {
         setValues((values) => ({
@@ -49,7 +43,6 @@ const Signup = (props) => {
             body: JSON.stringify(data),
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).then((results) => {
-            //            history.push('/login');
             props.onSubmit();
         });
     };
@@ -92,6 +85,10 @@ const Signup = (props) => {
             </form>
         </div>
     );
+};
+
+Signup.propTypes = {
+    onSubmit: PropTypes.func
 };
 
 export default Signup;

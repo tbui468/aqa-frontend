@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './popupBox.css';
 
@@ -12,6 +13,12 @@ const PopupBox = (props) => {
             </div>
         </div>
     );
+};
+
+PopupBox.propTypes = {
+    visible: PropTypes.bool,
+    onClose: PropTypes.func,
+    forms: PropTypes.element
 };
 
 export default PopupBox;

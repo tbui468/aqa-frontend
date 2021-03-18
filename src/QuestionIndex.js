@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import QuestionSummary from './QuestionSummary';
 import PopupBox from './PopupBox';
 import QuestionForm from './QuestionForm';
@@ -99,6 +100,11 @@ const QuestionIndex = (props) => {
             </section>
         </div>
     );
+};
+
+QuestionIndex.propTypes = {
+    user: PropTypes.object,
+    toggleOverlay: PropTypes.func
 };
 
 export default QuestionIndex;

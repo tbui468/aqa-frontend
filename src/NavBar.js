@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './navBar.css';
 
@@ -70,6 +71,12 @@ const NavBar = (props) => {
             </div>
         </ul>
     );
+};
+
+NavBar.propTypes = {
+    user: PropTypes.object,
+    login: PropTypes.func,
+    logout: PropTypes.func
 };
 
 export default NavBar;

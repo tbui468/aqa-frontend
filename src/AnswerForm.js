@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const AnswerForm = (props) => {
     const [text, setText] = useState('');
@@ -19,11 +20,21 @@ const AnswerForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit} >
-            <textarea value={text} name="text" onChange={handleTextChange} required maxLength="280" placeholder="Type your answer here" />
+            <textarea
+                value={text}
+                name="text"
+                onChange={handleTextChange}
+                required
+                maxLength="280"
+                placeholder="Type your answer here" />
             <br />
             <button type="submit">Submit</button>
         </form>
     );
+};
+
+AnswerForm.propTypes = {
+    onSubmit: PropTypes.func
 };
 
 export default AnswerForm;

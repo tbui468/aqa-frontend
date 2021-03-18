@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import AccessDenied from './AccessDenied';
 import PopupBox from './PopupBox';
 
@@ -30,6 +31,11 @@ const Profile = (props) => {
             )}
         </div>
     );
+};
+
+Profile.propTypes = {
+    user: PropTypes.object,
+    toggleOverlay: PropTypes.func
 };
 
 export default Profile;

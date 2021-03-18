@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './router.css';
+import PropTypes from 'prop-types';
 
 import Main from './Main';
 import QuestionIndex from './QuestionIndex';
@@ -31,6 +32,13 @@ const Router = (props) => {
             <Footer />
         </BrowserRouter>
     );
+};
+
+Router.propTypes = {
+    user: PropTypes.object,
+    login: PropTypes.func,
+    logout: PropTypes.func,
+    toggleOverlay: PropTypes.func
 };
 
 export default Router;

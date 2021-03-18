@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Signup from './Signup';
 import './main.css';
 import mainImage from './main.jpg';
@@ -36,6 +37,10 @@ const Main = (props) => {
             </div>
         </div>
     );
+};
+
+Main.propTypes = {
+    toggleOverlay: PropTypes.func
 };
 
 export default Main;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PopupBox from './PopupBox';
 import { useParams } from 'react-router';
+import PropTypes from 'prop-types';
 import AnswerForm from './AnswerForm';
 import './questionDetail.css';
 
@@ -140,7 +141,11 @@ const QuestionDetail = (props) => {
                                         <form onSubmit={voteFor} className="question-detail-vote-form">
                                             <input name="answer_id" value={item.answer_id} hidden />
                                             <button
-                                                className={item.vote ? "vote-button vote-active" : "vote-button vote-inactive"}
+                                                className=
+                                                    {item.vote ?
+                                                        "vote-button vote-active" :
+                                                        "vote-button vote-inactive"
+                                                    }
                                                 type="submit"
                                                 disabled={item.owns}>
                                                 Vote
@@ -157,6 +162,11 @@ const QuestionDetail = (props) => {
             </section>
         </section>
     );
+};
+
+QuestionDetail.propTypes = {
+    user: PropTypes.object,
+    toggleOverlay: PropTypes.func
 };
 
 export default QuestionDetail;
