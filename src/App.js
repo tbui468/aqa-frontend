@@ -5,17 +5,9 @@ import './app.css';
 
 
 const App = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+//    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [overlayClass, setOverlayClass] = useState('');
     const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        authenticateUser();
-    }, []);
-
-    useEffect(() => {
-
-    }, [user]);
 
     const authenticateUser = () => {
         fetch('http://localhost:3000/profile', {
@@ -37,6 +29,15 @@ const App = () => {
                 }
             });
     };
+
+    useEffect(() => {
+        authenticateUser();
+    }, []);
+
+    useEffect(() => {
+
+    }, [user]);
+
 
     const login = (e) => {
         e.preventDefault();

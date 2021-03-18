@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './navBar.css';
-//one option: each time Navbar is created, check logged in status
 
 const NavBar = (props) => {
-    const history = useHistory();
-
     const [values, setValues] = useState({
         username: '',
         password: ''

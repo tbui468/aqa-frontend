@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import QuestionSummary from './QuestionSummary';
 import PopupBox from './PopupBox';
 import QuestionForm from './QuestionForm';
@@ -17,10 +16,6 @@ const QuestionIndex = (props) => {
     ]);
 
     const [visible, setVisible] = useState(false);
-
-    useEffect(() => {
-        updateIndex();
-    }, []);
 
     const updateIndex = () => {
         fetch('http://localhost:3000/questions', {
@@ -45,6 +40,11 @@ const QuestionIndex = (props) => {
                 setQuestionSummaries(arr);
             });
     };
+
+    useEffect(() => {
+        updateIndex();
+    }, []);
+
 
     const openQuestionForm = () => {
         props.toggleOverlay();

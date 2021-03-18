@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import PopupBox from './PopupBox';
 import { useParams } from 'react-router';
 import AnswerForm from './AnswerForm';
 import './questionDetail.css';
 
 const QuestionDetail = (props) => {
-    const { question_id } = useParams();
-    const history = useHistory();
+    const { questionId } = useParams();
     const [values, setValues] = useState({
         question: '',
         topic: '',
@@ -20,12 +18,9 @@ const QuestionDetail = (props) => {
 
     const [answerFormVisible, setAnswerFormVisible] = useState(false);
 
-    useEffect(() => {
-        getDetails(); //this needs to be called when user logs in
-    }, []);
 
     const getDetails = () => {
-        fetch('http://localhost:3000/questions/' + question_id, {
+        fetch('http://localhost:3000/questions/' + questionId, {
             method: 'GET',
             mode: 'cors',
             credentials: 'include'
@@ -41,10 +36,10 @@ const QuestionDetail = (props) => {
                     let obj = {
                         answer: json.answers[i].answer_text,
                         author: json.answers[i].user_name,
-                        percent: Math.round(json.answers[i].answer_percent * 10000) / 100,
+                        percent: Math.round(json.answers[i].answer_percent * 10000) / 100, //can we compute this client side???
                         date: json.answers[i].answer_date,
-                        vote: json.answers[i].voted,
-                        owns: json.answers[i].owns, //if true, disable vote button for that answer
+                        vote: json.answers[i].voted, //should compute client-side
+                        owns: json.answers[i].owns, //if true, disable vote button for that answer - should compute client-side
                         answer_id: json.answers[i].answer_id
                     };
                     if (json.answers[i].owns) alreadyAnswered = true;
@@ -55,12 +50,17 @@ const QuestionDetail = (props) => {
                     topic: json.question.question_topic,
                     author: json.question.user_name,
                     date: json.question.question_date,
-                    owns: json.question.owns, //if true, disable post answer button
-                    answered: alreadyAnswered,
+                    owns: json.question.owns, //if true, disable post answer button (should compute this client-side)
+                    answered: alreadyAnswered, //should compute this client side
                     answers: arr
                 }));
             });
     };
+
+    useEffect(() => {
+        getDetails(); //this needs to be called when user logs in
+    }, []);
+
 
     const openAnswerForm = () => {
         props.toggleOverlay();
@@ -73,7 +73,7 @@ const QuestionDetail = (props) => {
     };
 
     const submitAnswerForm = (data) => {
-        fetch('http://localhost:3000/questions/' + question_id + '/answers', {
+        fetch('http://localhost:3000/questions/' + questionId + '/answers', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
@@ -87,8 +87,8 @@ const QuestionDetail = (props) => {
 
     const voteFor = (e) => {
         e.preventDefault();
-        const answer_id = e.target.answer_id.value;
-        fetch('http://localhost:3000/questions/' + question_id + '/answers/' + answer_id + '/votes', {
+        const answerId = e.target.answer_id.value;
+        fetch('http://localhost:3000/questions/' + questionId + '/answers/' + answerId + '/votes', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include'
@@ -113,7 +113,16 @@ const QuestionDetail = (props) => {
                     <p>{values.date}</p>
                 </section>
                 <section className="question-detail-answer-button">
-                    {props.user ? (<button className="new-answer-button" onClick={openAnswerForm} disabled={values.owns || values.answered}>Post New Answer</button>) : (<div />)}
+                    {props.user ? (
+                        <button className="new-answer-button"
+                            onClick={openAnswerForm}
+                            disabled={values.owns || values.answered}
+                        >
+                            Post New Answer
+                        </button>
+                    ) : (
+                        <div />
+                    )}
                 </section>
             </section>
             <section className="question-detail-answers">
@@ -130,7 +139,12 @@ const QuestionDetail = (props) => {
                                     {props.user ? (
                                         <form onSubmit={voteFor} className="question-detail-vote-form">
                                             <input name="answer_id" value={item.answer_id} hidden />
-                                            <button className={item.vote ? "vote-button vote-active" : "vote-button vote-inactive"} type="submit" disabled={item.owns}>Vote</button>
+                                            <button
+                                                className={item.vote ? "vote-button vote-active" : "vote-button vote-inactive"}
+                                                type="submit"
+                                                disabled={item.owns}>
+                                                Vote
+                                            </button>
                                         </form>
                                     ) : (
                                         <div className="question-detail-vote-form" />
