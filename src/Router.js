@@ -22,7 +22,7 @@ const Router = (props) => {
                 <Route exact path="/questions">
                     <QuestionIndex toggleOverlay={props.toggleOverlay} user={props.user} />
                 </Route>
-                <Route exact path="/questions/:question_id">
+                <Route exact path="/questions/:questionId">
                     <QuestionDetail toggleOverlay={props.toggleOverlay} user={props.user} />
                 </Route>
                 <Route exact path="/profile">
