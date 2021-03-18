@@ -62,7 +62,7 @@ const QuestionIndex = (props) => {
             mode: 'cors',
             credentials: 'include',
             body: JSON.stringify(data),
-            headers: {'Content-Type': 'application/json; charset=UTF-8' }
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).then((result) => {
             closeQuestionForm();
             updateIndex();
@@ -81,7 +81,7 @@ const QuestionIndex = (props) => {
             />
             <section className="question-index-container">
                 <h1>Newest Questions</h1>
-                {props.user ? (<button onClick={openQuestionForm}>New question</button>) : (<div></div>)}
+                {props.user ? (<button onClick={openQuestionForm}>New question</button>) : (<div />)}
                 <ul>
                     {questionSummaries.map((item, index) => {
                         return (

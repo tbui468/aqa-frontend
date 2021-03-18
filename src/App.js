@@ -30,13 +30,13 @@ const App = () => {
                 if (result.user_name) {
                     setUser({
                         username: result.user_name,
-                        email: result.user_email,
+                        email: result.user_email
                     });
-                }else{
+                } else {
                     setUser(null);
                 }
             });
-    }
+    };
 
     const login = (e) => {
         e.preventDefault();
@@ -73,9 +73,9 @@ const App = () => {
     };
 
     const toggleOverlay = () => {
-        if(overlayClass === '') {
+        if (overlayClass === '') {
             setOverlayClass('app-overlay');
-        }else{
+        } else {
             setOverlayClass('');
         }
     };

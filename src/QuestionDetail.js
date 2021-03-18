@@ -21,8 +21,8 @@ const QuestionDetail = (props) => {
     const [answerFormVisible, setAnswerFormVisible] = useState(false);
 
     useEffect(() => {
-        getDetails(); //this needs to be called when user logs in 
-    }, [values]);
+        getDetails(); //this needs to be called when user logs in
+    }, []);
 
     const getDetails = () => {
         fetch('http://localhost:3000/questions/' + question_id, {
@@ -47,7 +47,7 @@ const QuestionDetail = (props) => {
                         owns: json.answers[i].owns, //if true, disable vote button for that answer
                         answer_id: json.answers[i].answer_id
                     };
-                    if(json.answers[i].owns) alreadyAnswered = true;
+                    if (json.answers[i].owns) alreadyAnswered = true;
                     arr.push(obj);
                 }
                 setValues((values) => ({
@@ -95,25 +95,25 @@ const QuestionDetail = (props) => {
         }).then((result) => {
             getDetails();
         });
-    }
+    };
 
     return (
         <section className="question-detail-container">
-            <PopupBox onClose={closeAnswerForm} visible={answerFormVisible} 
-            forms={
-                <AnswerForm
-                    onSubmit={submitAnswerForm}
-                />
-            }
+            <PopupBox onClose={closeAnswerForm} visible={answerFormVisible}
+                forms={
+                    <AnswerForm
+                        onSubmit={submitAnswerForm}
+                    />
+                }
             />
             <section className="question-detail-question">
                 <section className="question-detail-question-text">
-                    <h1 dangerouslySetInnerHTML={{__html: values.question}} />
+                    <h1 dangerouslySetInnerHTML={{ __html: values.question }} />
                     <h2>{values.topic}</h2>
                     <p>{values.date}</p>
                 </section>
                 <section className="question-detail-answer-button">
-                {props.user ? (<button className="new-answer-button" onClick={openAnswerForm} disabled={values.owns || values.answered}>Post New Answer</button>) : (<div></div>)}
+                    {props.user ? (<button className="new-answer-button" onClick={openAnswerForm} disabled={values.owns || values.answered}>Post New Answer</button>) : (<div />)}
                 </section>
             </section>
             <section className="question-detail-answers">
@@ -123,7 +123,7 @@ const QuestionDetail = (props) => {
                             <section className="question-detail-answer">
                                 <li key={item.answer_id}>
                                     <section className="question-detail-answer-text">
-                                        <h3 dangerouslySetInnerHTML={{__html: item.answer}} />
+                                        <h3 dangerouslySetInnerHTML={{ __html: item.answer }} />
                                         <p>{item.percent}% of weighted votes</p>
                                         <p>{item.date}</p>
                                     </section>
@@ -133,7 +133,7 @@ const QuestionDetail = (props) => {
                                             <button className={item.vote ? "vote-button vote-active" : "vote-button vote-inactive"} type="submit" disabled={item.owns}>Vote</button>
                                         </form>
                                     ) : (
-                                        <div className="question-detail-vote-form"></div>
+                                        <div className="question-detail-vote-form" />
                                     )}
                                 </li>
                             </section>

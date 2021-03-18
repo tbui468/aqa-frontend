@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const QuestionSummary = ({ id, question, topic, date }) => {
     return (
         <div>
-            <Link to={'/questions/' + id} dangerouslySetInnerHTML={{__html: question}} />
+            <Link to={'/questions/' + id} dangerouslySetInnerHTML={{ __html: question }} />
             <p>{topic}</p>
             <p>{date}</p>
         </div>
