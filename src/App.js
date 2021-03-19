@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Router from './Router';
 import './index.css';
-import './app.css';
 
 
 const App = () => {
@@ -75,14 +74,14 @@ const App = () => {
 
     const toggleOverlay = () => {
         if (overlayClass === '') {
-            setOverlayClass('app-overlay');
+            setOverlayClass('overlay');
         } else {
             setOverlayClass('');
         }
     };
 
     return (
-        <div id="app-container">
+        <div>
             <div className={overlayClass} />
             <Router user={user} toggleOverlay={toggleOverlay} login={login} logout={logout} />
         </div>
