@@ -48,7 +48,7 @@ table {
 }
 
 /*
- ***********app fonts****************
+ ***********custom styles****************
  */
 body {
     color: #888; /* this gray color looks a lot better for text on white backgrounds*/
@@ -111,3 +111,79 @@ p a {
     border-bottom: 1px solid #dfe2e5;
 }
 
+/*
+ **************CLEARFIX****************
+ */
+
+.group:before,
+.group:after {
+    content: "";
+    display: table;
+}
+
+.group:after {
+    clear: both;
+}
+
+.group {
+    clear: both;
+    *zoom: 1;
+}
+
+
+/*
+ *************GRID*********************
+ */
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.container,
+.grid {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.container {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.col-2-5 {
+    width: 40%;
+}
+
+.col-3-5 {
+    width: 60%;
+}
+
+.col-2-5,
+.col-3-5 {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.grid,
+.col-2-5,
+.col-3-5 {
+}
+
+
+/*
+ ****************MAIN********************
+ */
+
+.main img {
+    width: 100%;
+    height: 100%;
+}
+
+.main button {
+    display:block;
+    margin: 50% auto;
+}

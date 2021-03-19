@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Signup from './Signup';
-import './main.css';
 import mainImage from './main.jpg';
 import PopupBox from './PopupBox';
 
@@ -19,22 +18,24 @@ const Main = (props) => {
     };
 
     return (
-        <div id="main-container">
-            <div id="main-left-child">
-                <img id="main-image" src={mainImage} alt="main image" />
-            </div>
-            <div id="main-right-child">
-                <PopupBox onClose={closeSignup} visible={signupFormVisible}
-                    forms={
-                        <Signup
-                            onSubmit={closeSignup}
-                            title="Signup here"
-                            method="POST"
-                            route={'http://localhost:3000/signup'}
-                        />
-                    }/>
-                <button id="main-signup-button" onClick={openSignup}>Signup</button>
-            </div>
+        <div>
+            <section className="grid">
+                <div className="main col-3-5">
+                    <img src={mainImage} alt="main image" />
+                </div>
+                <div className="main col-2-5">
+                    <button onClick={openSignup}>Signup</button>
+                </div>
+            </section>
+            <PopupBox onClose={closeSignup} visible={signupFormVisible}
+                forms={
+                    <Signup
+                        onSubmit={closeSignup}
+                        title="Signup here"
+                        method="POST"
+                        route={'http://localhost:3000/signup'}
+                    />
+                }/>
         </div>
     );
 };
