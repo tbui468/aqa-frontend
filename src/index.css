@@ -285,5 +285,13 @@ td {
 
 
 /*
- *************ANSWERS LIST***************
+ *************ANSWERS TABLE***************
  */
+
+.answers-table .vote-active {
+    background: green;
+}
+
+.answers-table .vote-inactive {
+    background: grey;
+}

@@ -32,11 +32,16 @@ const QuestionDetail = (props) => {
                 let arr = [];
                 let alreadyAnswered = false;
                 for (let i = 0; i < json.answers.length; i++) {
+                    //check if user already voted for the current answer
+                    let voted = false;
+                    for(let j = 0; j < json.answers[i].answer_votes.length; j++) {
+                        if(props.user && json.answers[i].answer_votes[j].vote_user.toString() === props.user.id.toString()) voted = true;
+                    }
                     let obj = {
                         answer: json.answers[i].answer_text,
                         percent: Math.round(json.answers[i].answer_weight / json.question.question_weight * 10000) / 100,
                         date: json.answers[i].answer_date,
-                        vote: json.answers[i].voted, //should compute client-side - what do I need?
+                        voted: voted, //should compute client-side - what do I need?
                         owns: props.user ? json.answers[i].answer_user.toString() === props.user.id.toString() : false,
                         answer_id: json.answers[i].answer_id
                     };
@@ -59,7 +64,7 @@ const QuestionDetail = (props) => {
 
     useEffect(() => {
         getDetails(); //this needs to be called when user logs in
-    }, []);
+    }, [props.user]);
 
 
     const openAnswerForm = () => {
@@ -135,7 +140,7 @@ const QuestionDetail = (props) => {
                                                 <input name="answer_id" value={item.answer_id} hidden />
                                                 <button
                                                     className=
-                                                        {item.vote ?
+                                                        {item.voted ?
                                                             "vote-active" :
                                                             "vote-inactive"
                                                         }
