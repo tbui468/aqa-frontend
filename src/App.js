@@ -21,7 +21,8 @@ const App = () => {
                 if (result.user_name) {
                     setUser({
                         username: result.user_name,
-                        email: result.user_email
+                        email: result.user_email,
+                        id: result.user_id
                     });
                 } else {
                     setUser(null);

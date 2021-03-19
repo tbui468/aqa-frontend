@@ -84,17 +84,19 @@ const QuestionIndex = (props) => {
                 {props.user ? (<button onClick={openQuestionForm}>New question</button>) : (<div />)}
                 <table>
                     <tbody>
-                    {questionSummaries.map((item, index) => {
-                        return (
-                            <tr key={index}>
-                                <td>
-                                    <Link to={'/questions/' + item.id.toString()} dangerouslySetInnerHTML={{ __html: item.question }} />
-                                    <p>{item.topic}</p>
-                                    <p>{item.date}</p>
-                                </td>
-                            </tr>
-                        );
-                    })}
+                        {questionSummaries.map((item, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>
+                                        <Link
+                                            to={'/questions/' + item.id.toString()}
+                                            dangerouslySetInnerHTML={{ __html: item.question }} />
+                                        <p>{item.topic}</p>
+                                        <p>{item.date}</p>
+                                    </td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
             </div>

@@ -17,19 +17,21 @@ const Profile = (props) => {
     };
 
     return (
-        <div>
-            <PopupBox onClose={closeEditForm} visible={editFormVisible} />
-            {props.user ? (
-                <div>
-                    <h1>Profile page</h1>
-                    <p>Name: {props.user.username}</p>
-                    <p>Email: {props.user.email}</p>
-                    <button onClick={openEditForm} >Edit profile</button>
-                </div>
-            ) : (
-                <AccessDenied />
-            )}
-        </div>
+        <section className="row">
+            <div className="container">
+                <PopupBox onClose={closeEditForm} visible={editFormVisible} />
+                {props.user ? (
+                    <div>
+                        <h1>Profile page</h1>
+                        <p>Name: {props.user.username}</p>
+                        <p>Email: {props.user.email}</p>
+                        <button onClick={openEditForm} >Edit profile</button>
+                    </div>
+                ) : (
+                    <AccessDenied />
+                )}
+            </div>
+        </section>
     );
 };
 

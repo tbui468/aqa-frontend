@@ -9,7 +9,6 @@ const QuestionDetail = (props) => {
     const [values, setValues] = useState({
         question: '',
         topic: '',
-        author: '',
         owns: false, //whether user wrote the question or not
         answered: false, //whether user has answered this question (once) or not
         date: '',
@@ -35,23 +34,24 @@ const QuestionDetail = (props) => {
                 for (let i = 0; i < json.answers.length; i++) {
                     let obj = {
                         answer: json.answers[i].answer_text,
-                        author: json.answers[i].user_name,
-                        percent: Math.round(json.answers[i].answer_percent * 10000) / 100, //can we compute this client side???
+                        percent: Math.round(json.answers[i].answer_weight / json.question.question_weight * 10000) / 100,
                         date: json.answers[i].answer_date,
-                        vote: json.answers[i].voted, //should compute client-side
-                        owns: json.answers[i].owns, //if true, disable vote button for that answer - should compute client-side
+                        vote: json.answers[i].voted, //should compute client-side - what do I need?
+                        owns: props.user ? json.answers[i].answer_user.toString() === props.user.id.toString() : false,
                         answer_id: json.answers[i].answer_id
                     };
-                    if (json.answers[i].owns) alreadyAnswered = true;
+                    if (props.user ? json.answers[i].answer_user.toString() === props.user.id.toString() : false) alreadyAnswered = true;
                     arr.push(obj);
                 }
+
+                arr.sort((a, b) => (parseFloat(a.percent) > parseFloat(b.percent)) ? -1 : 1);
+
                 setValues((values) => ({
                     question: json.question.question_text,
                     topic: json.question.question_topic,
-                    author: json.question.user_name,
                     date: json.question.question_date,
-                    owns: json.question.owns, //if true, disable post answer button (should compute this client-side)
-                    answered: alreadyAnswered, //should compute this client side
+                    owns: props.user ? json.question.question_user.toString() === props.user.id.toString() : false,
+                    answered: alreadyAnswered,
                     answers: arr
                 }));
             });
@@ -106,20 +106,22 @@ const QuestionDetail = (props) => {
                     />
                 }
             />
-            <div className="container group question-summary">
-                <h1 dangerouslySetInnerHTML={{ __html: values.question }} />
-                <h2>{values.topic}</h2>
-                <p>{values.date}</p>
-                {props.user ? (
-                    <button onClick={openAnswerForm} disabled={values.owns || values.answered}>
-                        Post New Answer
-                    </button>
-                ) : (
-                    <div></div>
-                )}
+            <div className="container group">
+                <section className="question-summary">
+                    <h1 dangerouslySetInnerHTML={{ __html: values.question }} />
+                    <h2>{values.topic}</h2>
+                    <p>{values.date}</p>
+                    {props.user ? (
+                        <button onClick={openAnswerForm} disabled={values.owns || values.answered}>
+                            Post New Answer
+                        </button>
+                    ) : (
+                        <div />
+                    )}
+                </section>
             </div>
-            <div className="container answers-list">
-                <table>
+            <div className="container">
+                <table className="answers-table">
                     <tbody>
                         {values.answers.map((item, index) => {
                             return (
@@ -143,7 +145,7 @@ const QuestionDetail = (props) => {
                                                 </button>
                                             </form>
                                         ) : (
-                                            <div></div>
+                                            <div />
                                         )}
                                     </td>
                                 </tr>
