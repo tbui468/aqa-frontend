@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import QuestionSummary from './QuestionSummary';
 import PopupBox from './PopupBox';
 import QuestionForm from './QuestionForm';
-import './questionIndex.css';
 
 const QuestionIndex = (props) => {
     const [questionSummaries, setQuestionSummaries] = useState([
@@ -72,7 +71,7 @@ const QuestionIndex = (props) => {
 
 
     return (
-        <div>
+        <section className="row">
             <PopupBox onClose={closeQuestionForm} visible={visible}
                 forms={
                     <QuestionForm
@@ -80,27 +79,29 @@ const QuestionIndex = (props) => {
                     />
                 }
             />
-            <section className="question-index-container">
+            <div className="container">
                 <h1>Newest Questions</h1>
                 {props.user ? (<button onClick={openQuestionForm}>New question</button>) : (<div />)}
-                <ul>
+                <table>
+                    <tbody>
                     {questionSummaries.map((item, index) => {
                         return (
-                            <li key={index}>
-                                <QuestionSummary
-                                    id={item.id.toString()}
-                                    question={item.question}
-                                    topic={item.topic}
-                                    date={item.date}
-                                />
-                            </li>
+                            <tr key={index}>
+                                <td>
+                                    <Link to={'/questions/' + item.id.toString()} dangerouslySetInnerHTML={{ __html: item.question }} />
+                                    <p>{item.topic}</p>
+                                    <p>{item.date}</p>
+                                </td>
+                            </tr>
                         );
                     })}
-                </ul>
-            </section>
-        </div>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     );
 };
+
 
 QuestionIndex.propTypes = {
     user: PropTypes.object,

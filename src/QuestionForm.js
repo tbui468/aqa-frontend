@@ -25,7 +25,7 @@ const QuestionForm = (props) => {
     };
 
     return (
-        <div>
+        <section>
             <form onSubmit={handleSubmit}>
                 <select name="topic">
                     <option value="Business and Administration">Business and Administration</option>
@@ -47,7 +47,7 @@ const QuestionForm = (props) => {
                 <br />
                 <button type="submit">Submit</button>
             </form>
-        </div>
+        </section>
     );
 };
 

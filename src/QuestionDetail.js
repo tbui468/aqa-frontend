@@ -3,7 +3,6 @@ import PopupBox from './PopupBox';
 import { useParams } from 'react-router';
 import PropTypes from 'prop-types';
 import AnswerForm from './AnswerForm';
-import './questionDetail.css';
 
 const QuestionDetail = (props) => {
     const { questionId } = useParams();
@@ -99,7 +98,7 @@ const QuestionDetail = (props) => {
     };
 
     return (
-        <section className="question-detail-container">
+        <section className="row">
             <PopupBox onClose={closeAnswerForm} visible={answerFormVisible}
                 forms={
                     <AnswerForm
@@ -107,59 +106,52 @@ const QuestionDetail = (props) => {
                     />
                 }
             />
-            <section className="question-detail-question">
-                <section className="question-detail-question-text">
-                    <h1 dangerouslySetInnerHTML={{ __html: values.question }} />
-                    <h2>{values.topic}</h2>
-                    <p>{values.date}</p>
-                </section>
-                <section className="question-detail-answer-button">
-                    {props.user ? (
-                        <button className="new-answer-button"
-                            onClick={openAnswerForm}
-                            disabled={values.owns || values.answered}
-                        >
-                            Post New Answer
-                        </button>
-                    ) : (
-                        <div />
-                    )}
-                </section>
-            </section>
-            <section className="question-detail-answers">
-                <ul>
-                    {values.answers.map((item, index) => {
-                        return (
-                            <section className="question-detail-answer">
-                                <li key={item.answer_id}>
-                                    <section className="question-detail-answer-text">
+            <div className="container group question-summary">
+                <h1 dangerouslySetInnerHTML={{ __html: values.question }} />
+                <h2>{values.topic}</h2>
+                <p>{values.date}</p>
+                {props.user ? (
+                    <button onClick={openAnswerForm} disabled={values.owns || values.answered}>
+                        Post New Answer
+                    </button>
+                ) : (
+                    <div></div>
+                )}
+            </div>
+            <div className="container answers-list">
+                <table>
+                    <tbody>
+                        {values.answers.map((item, index) => {
+                            return (
+                                <tr>
+                                    <td key={item.answer_id}>
                                         <h3 dangerouslySetInnerHTML={{ __html: item.answer }} />
                                         <p>{item.percent}% of weighted votes</p>
                                         <p>{item.date}</p>
-                                    </section>
-                                    {props.user ? (
-                                        <form onSubmit={voteFor} className="question-detail-vote-form">
-                                            <input name="answer_id" value={item.answer_id} hidden />
-                                            <button
-                                                className=
-                                                    {item.vote ?
-                                                        "vote-button vote-active" :
-                                                        "vote-button vote-inactive"
-                                                    }
-                                                type="submit"
-                                                disabled={item.owns}>
-                                                Vote
-                                            </button>
-                                        </form>
-                                    ) : (
-                                        <div className="question-detail-vote-form" />
-                                    )}
-                                </li>
-                            </section>
-                        );
-                    })}
-                </ul>
-            </section>
+                                        {props.user ? (
+                                            <form onSubmit={voteFor}>
+                                                <input name="answer_id" value={item.answer_id} hidden />
+                                                <button
+                                                    className=
+                                                        {item.vote ?
+                                                            "vote-active" :
+                                                            "vote-inactive"
+                                                        }
+                                                    type="submit"
+                                                    disabled={item.owns}>
+                                                    Vote
+                                                </button>
+                                            </form>
+                                        ) : (
+                                            <div></div>
+                                        )}
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
         </section>
     );
 };
