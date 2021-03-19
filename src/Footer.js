@@ -1,16 +1,18 @@
 import React from 'react';
 
-import './footer.css';
-
 const Footer = () => {
     return (
-        <div id="footer-container">
-            <a className="footer-item" href="#">About</a>
-            <a className="footer-item" href="#">Terms of Service</a>
-            <a className="footer-item" href="#">Privacy Policy</a>
-            <a className="footer-item" href="#">Settings</a>
-            <a className="footer-item" href="#">&copy;Waqa</a>
-        </div>
+        <footer className="primary-footer container group">
+            <small>&copy;Waqa</small>
+            <nav className="nav">
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+        </footer>
     );
 };
 

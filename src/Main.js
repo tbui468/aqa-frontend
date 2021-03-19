@@ -18,7 +18,7 @@ const Main = (props) => {
     };
 
     return (
-        <div>
+        <div className="row">
             <section className="grid">
                 <div className="main col-3-5">
                     <img src={mainImage} alt="main image" />

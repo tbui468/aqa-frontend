@@ -51,6 +51,7 @@ table {
  ***********custom styles****************
  */
 body {
+    background: #293f50;
     color: #888; /* this gray color looks a lot better for text on white backgrounds*/
     font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -130,6 +131,14 @@ p a {
     *zoom: 1;
 }
 
+/*
+ *************ROWS*********************
+ */
+
+.row {
+    background: #fff;
+}
+
 
 /*
  *************GRID*********************
@@ -173,6 +182,48 @@ p a {
 .col-3-5 {
 }
 
+/*
+ ***********PRIMARY-HEADER*****************
+ */
+
+ .logo {
+    float: left;
+ }
+
+ .primary-nav {
+    padding: 15px 20px;
+ }
+
+
+/*
+ ***********PRIMARY-FOOTER******************
+ */
+
+.primary-footer {
+    padding: 15px 20px;
+}
+
+.primary-footer small {
+    float: left;
+}
+
+/*
+ ****************NAVIGATION***************
+ */
+
+.nav {
+    text-align: right;
+}
+
+.nav li {
+    display: inline-block;
+    margin: 0 10px;
+    vertical-align: top;
+}
+
+.nav li:last-child {
+    margin-right: 0;
+}
 
 /*
  ****************MAIN********************
@@ -180,10 +231,10 @@ p a {
 
 .main img {
     width: 100%;
-    height: 100%;
+    vertical-align: middle; /* image acts like text, so there is a white space undereneat without this line */
 }
 
 .main button {
     display:block;
-    margin: 50% auto;
+    margin: 40% auto;
 }
