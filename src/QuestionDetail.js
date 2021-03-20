@@ -15,6 +15,8 @@ const QuestionDetail = (props) => {
         answers: [] //answers objects include answer, author, date (and later percent of votes)
     });
 
+    const [barClass, setBarClass] = useState('percent-bar-default');
+
     const [answerFormVisible, setAnswerFormVisible] = useState(false);
 
 
@@ -59,6 +61,7 @@ const QuestionDetail = (props) => {
                     answered: alreadyAnswered,
                     answers: arr
                 }));
+
             });
     };
 
@@ -98,7 +101,9 @@ const QuestionDetail = (props) => {
             mode: 'cors',
             credentials: 'include'
         }).then((result) => {
+            setBarClass('percent-bar-default');
             getDetails();
+            setBarClass('percent-bar-default percent-bar-full');
         });
     };
 
@@ -134,6 +139,7 @@ const QuestionDetail = (props) => {
                                     <td key={item.answer_id}>
                                         <h3 dangerouslySetInnerHTML={{ __html: item.answer }} />
                                         <p>{item.percent}% of weighted votes</p>
+                                        <div className={barClass}>&nbsp;</div>
                                         <p>{item.date}</p>
                                         {props.user ? (
                                             <form onSubmit={voteFor}>
@@ -142,7 +148,7 @@ const QuestionDetail = (props) => {
                                                     className=
                                                         {item.voted ?
                                                             "vote-active" :
-                                                            "vote-inactive"
+                                                            ""
                                                         }
                                                     type="submit"
                                                     disabled={item.owns}>

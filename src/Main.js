@@ -20,11 +20,11 @@ const Main = (props) => {
     return (
         <div className="row">
             <section className="grid">
-                <div className="main col-3-5">
-                    <img src={mainImage} alt="main image" />
+                <div className="col-3-5">
+                    <img className="main-img" src={mainImage} alt="main image" />
                 </div>
-                <div className="main col-2-5">
-                    <button onClick={openSignup}>Signup</button>
+                <div className="col-2-5">
+                    <button className="signup-button" onClick={openSignup}>Signup</button>
                 </div>
             </section>
             <PopupBox onClose={closeSignup} visible={signupFormVisible}
