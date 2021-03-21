@@ -55,7 +55,7 @@ const QuestionDetail = (props) => {
 
                 setValues((values) => ({
                     question: json.question.question_text,
-                    topic: json.question.question_topic,
+                    topic: json.question.question_topic ? json.question.question_topic : "topic pending",
                     date: json.question.question_date,
                     owns: props.user ? json.question.question_user.toString() === props.user.id.toString() : false,
                     answered: alreadyAnswered,

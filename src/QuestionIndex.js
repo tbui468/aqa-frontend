@@ -32,7 +32,7 @@ const QuestionIndex = (props) => {
                     const s = {
                         id: json[i].question_id,
                         question: json[i].question_text,
-                        topic: json[i].question_topic,
+                        topic: json[i].question_topic ? json[i].question_topic : "topic pending",
                         date: json[i].question_date
                     };
                     arr.push(s);
