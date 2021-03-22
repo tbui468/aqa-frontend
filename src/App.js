@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Router from './Router';
 import './index.css';
+import { BACKEND_DOMAIN } from './Globals';
 
 
 const App = () => {
@@ -9,7 +10,7 @@ const App = () => {
     const [user, setUser] = useState(null);
 
     const authenticateUser = () => {
-        fetch('http://localhost:3000/profile', {
+        fetch(BACKEND_DOMAIN + 'profile', {
             method: 'GET',
             mode: 'cors',
             credentials: 'include'
@@ -46,7 +47,7 @@ const App = () => {
             password: e.target.password.value
         };
 
-        fetch('http://localhost:3000/login', {
+        fetch(BACKEND_DOMAIN + 'login', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
@@ -63,7 +64,7 @@ const App = () => {
     };
 
     const logout = () => {
-        fetch('http://localhost:3000/logout', {
+        fetch(BACKEND_DOMAIN + 'logout', {
             method: 'GET',
             mode: 'cors',
             credentials: 'include'

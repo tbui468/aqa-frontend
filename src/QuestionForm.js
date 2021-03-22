@@ -17,7 +17,7 @@ const QuestionForm = (props) => {
         e.preventDefault();
 
         const data = {
-            text: e.target.text.value,
+            text: e.target.text.value
         };
 
         props.onSubmit(data);

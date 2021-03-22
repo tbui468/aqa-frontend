@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { BACKEND_DOMAIN } from './Globals';
 
 const Signup = (props) => {
     const [values, setValues] = useState({
@@ -36,7 +37,7 @@ const Signup = (props) => {
             password: e.target.password.value
         };
 
-        fetch('http://localhost:3000/users', {
+        fetch(BACKEND_DOMAIN + 'users', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',

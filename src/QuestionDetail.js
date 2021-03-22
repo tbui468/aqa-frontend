@@ -3,6 +3,7 @@ import PopupBox from './PopupBox';
 import { useParams } from 'react-router';
 import PropTypes from 'prop-types';
 import AnswerForm from './AnswerForm';
+import { BACKEND_DOMAIN } from './Globals';
 
 const QuestionDetail = (props) => {
     const { questionId } = useParams();
@@ -21,7 +22,7 @@ const QuestionDetail = (props) => {
 
 
     const getDetails = () => {
-        fetch('http://localhost:3000/questions/' + questionId, {
+        fetch(BACKEND_DOMAIN + 'questions/' + questionId, {
             method: 'GET',
             mode: 'cors',
             credentials: 'include'
@@ -36,8 +37,10 @@ const QuestionDetail = (props) => {
                 for (let i = 0; i < json.answers.length; i++) {
                     //check if user already voted for the current answer
                     let voted = false;
-                    for(let j = 0; j < json.answers[i].answer_votes.length; j++) {
-                        if(props.user && json.answers[i].answer_votes[j].vote_user.toString() === props.user.id.toString()) voted = true;
+                    for (let j = 0; j < json.answers[i].answer_votes.length; j++) {
+                        if (props.user && json.answers[i].answer_votes[j].vote_user.toString() === props.user.id.toString()) {
+                            voted = true;
+                        }
                     }
                     let obj = {
                         answer: json.answers[i].answer_text,
@@ -47,7 +50,9 @@ const QuestionDetail = (props) => {
                         owns: props.user ? json.answers[i].answer_user.toString() === props.user.id.toString() : false,
                         answer_id: json.answers[i].answer_id
                     };
-                    if (props.user ? json.answers[i].answer_user.toString() === props.user.id.toString() : false) alreadyAnswered = true;
+                    if (props.user ? json.answers[i].answer_user.toString() === props.user.id.toString() : false) {
+                        alreadyAnswered = true;
+                    }
                     arr.push(obj);
                 }
 
@@ -61,7 +66,6 @@ const QuestionDetail = (props) => {
                     answered: alreadyAnswered,
                     answers: arr
                 }));
-
             });
     };
 
@@ -81,7 +85,7 @@ const QuestionDetail = (props) => {
     };
 
     const submitAnswerForm = (data) => {
-        fetch('http://localhost:3000/questions/' + questionId + '/answers', {
+        fetch(BACKEND_DOMAIN + 'questions/' + questionId + '/answers', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
@@ -96,7 +100,7 @@ const QuestionDetail = (props) => {
     const voteFor = (e) => {
         e.preventDefault();
         const answerId = e.target.answer_id.value;
-        fetch('http://localhost:3000/questions/' + questionId + '/answers/' + answerId + '/votes', {
+        fetch(BACKEND_DOMAIN + 'questions/' + questionId + '/answers/' + answerId + '/votes', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include'

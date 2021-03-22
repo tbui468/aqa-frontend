@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import PopupBox from './PopupBox';
 import QuestionForm from './QuestionForm';
+import { BACKEND_DOMAIN } from './Globals';
 
 const QuestionIndex = (props) => {
     const [questionSummaries, setQuestionSummaries] = useState([
@@ -18,7 +19,7 @@ const QuestionIndex = (props) => {
     const [visible, setVisible] = useState(false);
 
     const updateIndex = () => {
-        fetch('http://localhost:3000/questions', {
+        fetch(BACKEND_DOMAIN + 'questions', {
             method: 'GET',
             mode: 'cors',
             credentials: 'include'
@@ -57,7 +58,7 @@ const QuestionIndex = (props) => {
     };
 
     const submitQuestionForm = (data) => {
-        fetch('http://localhost:3000/questions', {
+        fetch(BACKEND_DOMAIN + 'questions', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',

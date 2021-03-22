@@ -31,9 +31,6 @@ const Main = (props) => {
                 forms={
                     <Signup
                         onSubmit={closeSignup}
-                        title="Signup here"
-                        method="POST"
-                        route={'http://localhost:3000/signup'}
                     />
                 }/>
         </div>
