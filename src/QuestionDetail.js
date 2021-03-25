@@ -38,13 +38,15 @@ const QuestionDetail = (props) => {
                     //check if user already voted for the current answer
                     let voted = false;
                     for (let j = 0; j < json.answers[i].answer_votes.length; j++) {
-                        if (props.user && json.answers[i].answer_votes[j].vote_user.toString() === props.user.id.toString()) {
+                        if (props.user && json.answers[i].answer_votes[j].vote_user.toString() ===
+                            props.user.id.toString()) {
                             voted = true;
                         }
                     }
                     let obj = {
                         answer: json.answers[i].answer_text,
-                        percent: Math.round(json.answers[i].answer_weight / json.question.question_weight * 10000) / 100,
+                        percent: Math.round(json.answers[i].answer_weight /
+                                    json.question.question_weight * 10000) / 100,
                         date: json.answers[i].answer_date,
                         voted: voted, //should compute client-side - what do I need?
                         owns: props.user ? json.answers[i].answer_user.toString() === props.user.id.toString() : false,

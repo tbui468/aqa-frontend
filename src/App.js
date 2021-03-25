@@ -5,25 +5,26 @@ import { BACKEND_DOMAIN } from './Globals';
 
 
 const App = () => {
-//    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [overlayClass, setOverlayClass] = useState('');
     const [user, setUser] = useState(null);
 
     const authenticateUser = () => {
-        fetch(BACKEND_DOMAIN + 'profile', {
+        fetch(BACKEND_DOMAIN + 'users/profile', {
             method: 'GET',
             mode: 'cors',
             credentials: 'include'
         })
             .then((result) => {
-                return result.json(); //why is this this necessary? (Why can't it be combined with the next step?)
+                return result.json(); //json() is an async call, so need .then to handle it (or use async)
             })
             .then((result) => {
-                if (result.user_name) {
+                console.log(result[0].weights);
+                if (result[0].user_name) {
                     setUser({
-                        username: result.user_name,
-                        email: result.user_email,
-                        id: result.user_id
+                        username: result[0].user_name,
+                        email: result[0].user_email,
+                        id: result[0].user_id,
+                        weights: result[0].weights //array with objects with two keys (question_topic and count)
                     });
                 } else {
                     setUser(null);

@@ -214,6 +214,11 @@ textarea {
     width: 60%;
 }
 
+.col-1-5 {
+    width: 20%;
+}
+
+.col-1-5,
 .col-2-5,
 .col-3-5 {
     display: inline-block;
@@ -224,6 +229,7 @@ textarea {
 .col-2-5,
 .col-3-5 {
 }
+
 
 /*
  ***********PRIMARY-HEADER*****************

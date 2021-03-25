@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import PopupBox from './PopupBox';
 import QuestionForm from './QuestionForm';
 import { BACKEND_DOMAIN } from './Globals';
+import TopicDisplay from './TopicDisplay';
 
 const QuestionIndex = (props) => {
     const [questionSummaries, setQuestionSummaries] = useState([
@@ -80,26 +81,34 @@ const QuestionIndex = (props) => {
                     />
                 }
             />
-            <div className="container">
-                <h1>Newest Questions</h1>
-                {props.user ? (<button onClick={openQuestionForm}>New question</button>) : (<div />)}
-                <table>
-                    <tbody>
-                        {questionSummaries.map((item, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>
-                                        <Link
-                                            to={'/questions/' + item.id.toString()}
-                                            dangerouslySetInnerHTML={{ __html: item.question }} />
-                                        <p>{item.topic}</p>
-                                        <p>{item.date}</p>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+            <div className="grid">
+                <section className="col-1-5">
+                    <TopicDisplay user={props.user} />
+                </section>
+                <section className="col-3-5">
+                    <h1>Newest Questions</h1>
+                    {props.user ? (<button onClick={openQuestionForm}>New question</button>) : (<div />)}
+                    <table>
+                        <tbody>
+                            {questionSummaries.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>
+                                            <Link
+                                                to={'/questions/' + item.id.toString()}
+                                                dangerouslySetInnerHTML={{ __html: item.question }} />
+                                            <p>{item.topic}</p>
+                                            <p>{item.date}</p>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </section>
+                <section className="col-1-5">
+                    <p>placeholder</p>
+                </section>
             </div>
         </section>
     );

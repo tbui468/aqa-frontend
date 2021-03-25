@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AccessDenied from './AccessDenied';
 import PopupBox from './PopupBox';
+import TopicDisplay from './TopicDisplay';
 
 const Profile = (props) => {
     const [editFormVisible, setEditFormVisible] = useState(false);
@@ -28,8 +29,9 @@ const Profile = (props) => {
                         <button onClick={openEditForm} >Edit profile</button>
                     </div>
                 ) : (
-                    <AccessDenied />
+                    <AccessDenied user={props.user} />
                 )}
+                <TopicDisplay user={props.user} />
             </div>
         </section>
     );
