@@ -82,7 +82,7 @@ const QuestionIndex = (props) => {
                 }
             />
             <div className="grid">
-                <section className="col-1-5">
+                <section className="col-2-5">
                     <TopicDisplay user={props.user} />
                 </section>
                 <section className="col-3-5">
@@ -105,9 +105,6 @@ const QuestionIndex = (props) => {
                             })}
                         </tbody>
                     </table>
-                </section>
-                <section className="col-1-5">
-                    <p>placeholder</p>
                 </section>
             </div>
         </section>

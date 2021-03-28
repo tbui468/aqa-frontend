@@ -335,3 +335,38 @@ td {
 .percent-bar-full {
     width: 50%;
 }
+
+.bar-color-SaC {
+    fill: #93a1a1;
+}
+.bar-color-SaM {
+    fill: #eee8d5;
+}
+.bar-color-H {
+    fill: #b58900;
+}
+.bar-color-EaR {
+    fill: #cb4b16;
+}
+.bar-color-CaI {
+    fill: #dc322f;
+}
+.bar-color-S {
+    fill: #d33682;
+}
+.bar-color-BaF {
+    fill: #6c71c4;
+}
+.bar-color-EaM {
+    fill: #268bd2;
+}
+.bar-color-FaR {
+    fill: #2aa198;
+}
+.bar-color-PaG {
+    fill: #859900;
+}
+
+.bar:hover {
+    fill: #000000;
+}
