@@ -38,7 +38,7 @@ const QuestionIndex = (props) => {
                         date: json[i].question_date,
                         question_weight: json[i].question_weight,
                         top_answer: json[i].top_answer ? json[i].top_answer.answer_text : null,
-                        answer_weight: json[i].top_answer ? json[i].top_answer.answer_weight: 0
+                        answer_weight: json[i].top_answer ? json[i].top_answer.answer_weight : 0
                     };
                     arr.push(s);
                 }
@@ -102,31 +102,22 @@ const QuestionIndex = (props) => {
                                                 dangerouslySetInnerHTML={{ __html: item.question }} />
                                             <p>{item.topic}</p>
                                             <p>{item.date}</p>
-                                            {parseFloat(item.question_weight) == 0 ?
-                                                (
-                                                    <p>No Answers Posted Yet</p>
-                                                ):(
-                                                    <div>
-                                                        <p dangerouslySetInnerHTML={{ __html: item.top_answer }} />
-                                                        <svg height="20px">
-                                                            <g>
-                                                                <rect
-                                                                    width={parseFloat(item.answer_weight) / parseFloat(item.question_weight) * 100}
-                                                                    height="20"
-                                                                >
-                                                                </rect>
-                                                                <text
-                                                                    x={parseFloat(item.answer_weight) / parseFloat(item.question_weight) * 100 + 5}
-                                                                    y={9.5} 
-                                                                    dy=".35em"
-                                                                >
-                                                                    {Math.round(parseFloat(item.answer_weight) / parseFloat(item.question_weight) * 10000) / 100}%
-                                                                </text>
-                                                            </g>
-                                                        </svg>
-                                                    </div>
-                                                )
-                                            }
+                                            <div>
+                                                <p dangerouslySetInnerHTML={{ __html: item.top_answer ? item.top_answer : "[No answer posted]" }} />
+                                                <svg height="20px">
+                                                    <g>
+                                                        <rect
+                                                            width={item.question_weight ? parseFloat(item.answer_weight) / parseFloat(item.question_weight) * 100 : 1}
+                                                            height="20" />
+                                                        <text
+                                                            x={item.question_weight ? parseFloat(item.answer_weight) / parseFloat(item.question_weight) * 100 + 5 : 1 + 5}
+                                                            y={9.5}
+                                                            dy=".35em">
+                                                            {item.question_weight ? Math.round(parseFloat(item.answer_weight) / parseFloat(item.question_weight) * 10000) / 100 : 0}%
+                                                        </text>
+                                                    </g>
+                                                </svg>
+                                            </div>
                                         </td>
                                     </tr>
                                 );

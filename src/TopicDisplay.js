@@ -13,17 +13,22 @@ const TopicDisplay = (props) => {
         "bar-color-EaM",
         "bar-color-FaR",
         "bar-color-PaG"
-    ]
+    ];
     return (
-        <section>
+        <section className="topic-display">
             <h1>User weights</h1>
             {props.user ? (
                 <svg width="100%" height="300px">
                     {props.user.weights.map((obj, i) => {
                         return (
                             <g className={classNames[i] + " bar"} key={i}>
-                                <rect width={parseFloat(obj.count)} y={i * 25} height="20"></rect>
-                                <text x={parseFloat(obj.count) + 5} y={i * 25 + 9.5} dy=".35em">{obj.question_topic}</text>
+                                <rect width={parseFloat(obj.count)} y={i * 25} height="20" />
+                                <text
+                                    x={parseFloat(obj.count) + 5}
+                                    y={i * 25 + 9.5} dy=".35em"
+                                >
+                                    {obj.question_topic}
+                                </text>
                             </g>
                         );
                     })}

@@ -370,3 +370,7 @@ td {
 .bar:hover {
     fill: #000000;
 }
+
+.topic-display {
+    padding: 40px;
+}
